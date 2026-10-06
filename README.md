@@ -26,3 +26,11 @@ npm run build
 - React
 - Vite
 - JavaScript
+
+
+
+## Naming conventions
+
+**Branches:** `type/issue-number-short-description`, for example `feature/16-fetch-recipes` or `fix/31-broken-images`
+
+**Commit messages (semantic):** for example `feat: add search bar`, `fix: show error when API fails` or `docs: update README`
