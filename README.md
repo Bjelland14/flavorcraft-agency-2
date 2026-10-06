@@ -21,6 +21,22 @@ Create a production build:
 
 npm run build
 
+## Project Structure
+
+The project uses the following structure:
+
+- `components/` – Reusable React components
+- `pages/` – Application pages
+- `services/` – API requests
+- `styles/` – Global and shared styles
+
+## Routing
+
+React Router is used for client-side routing.
+
+- `/` – Home page
+- `/recipe` – Recipe Detail
+
 ## Tech Stack
 
 - React
