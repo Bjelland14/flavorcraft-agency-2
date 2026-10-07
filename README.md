@@ -25,16 +25,17 @@ npm run build
 
 The project uses the following structure:
 
-- `components/` – Reusable React components
-- `pages/` – Application pages
-- `services/` – API requests
-- `styles/` – Global and shared styles
+- `src/assets/components/` – Reusable React components (Header and Footer)
+- `src/pages/` – Application pages
+- `src/services/` – API requests
+- `src/styles/` – Global and component styles
 
 ## Routing
 
 React Router is used for client-side routing.
 
 - `/` – Home page
+- `/favorites` – Favorites page
 - `/recipe` – Recipe Detail
 
 ## Tech Stack

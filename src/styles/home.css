@@ -1,0 +1,25 @@
+.recipe-area {
+  margin-top: 24px;
+}
+
+.recipe-area h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.empty-state {
+  margin: 24px 0;
+  padding-block: 32px;
+  border-block: 1px solid #e5e5e5;
+  color: #666;
+  text-align: center;
+}
+
+
+@media (max-width: 360px) {
+  .content {
+    padding-inline: 12px;
+  }
+}
