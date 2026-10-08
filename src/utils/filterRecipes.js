@@ -1,4 +1,4 @@
-export function filterRecipes(recipes, { search = '', diet = '', time = '' } = {}) {
+export function filterRecipes(recipes, { search = '', category = '', diet = '', time = '' } = {}) {
   const query = search.trim().toLowerCase();
 
   return recipes.filter((recipe) => {
@@ -9,6 +9,10 @@ export function filterRecipes(recipes, { search = '', diet = '', time = '' } = {
     const matchesSearch = searchable.some((value) =>
       typeof value === 'string' && value.toLowerCase().includes(query)
     );
+    const matchesCategory = !category || (
+      typeof recipe.category === 'string' &&
+      recipe.category.trim().toLowerCase() === category.trim().toLowerCase()
+    );
     const matchesDiet = !diet || tags.some((tag) =>
       typeof tag === 'string' && tag.toLowerCase().replaceAll(' ', '-') === diet
     );
@@ -17,6 +21,6 @@ export function filterRecipes(recipes, { search = '', diet = '', time = '' } = {
       recipe.prepTime + recipe.cookTime <= Number(time)
     );
 
-    return matchesSearch && matchesDiet && matchesTime;
+    return matchesSearch && matchesCategory && matchesDiet && matchesTime;
   });
 }
