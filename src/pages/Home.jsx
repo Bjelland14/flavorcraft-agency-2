@@ -3,6 +3,7 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { RefreshIcon } from '@hugeicons/core-free-icons';
 import { getRecipes } from '../api/recipes';
 import { filterRecipes } from '../utils/filterRecipes';
+import { isFeedRecipe } from '../utils/isFeedRecipe';
 import '../styles/home.css';
 
 function Home({ search = '', diet = '', time = '' }) {
@@ -14,7 +15,9 @@ function Home({ search = '', diet = '', time = '' }) {
 
     getRecipes({ signal: controller.signal })
       .then((recipes) => {
-        if (!controller.signal.aborted) setResult({ status: 'success', recipes });
+        if (!controller.signal.aborted) {
+          setResult({ status: 'success', recipes: recipes.filter(isFeedRecipe) });
+        }
       })
       .catch(() => {
         if (!controller.signal.aborted) setResult({ status: 'error', recipes: [] });
@@ -61,7 +64,7 @@ function Home({ search = '', diet = '', time = '' }) {
               {recipes.map((recipe) => (
                 <li key={recipe.id} className="recipe-card">
                   <div className="recipe-image">
-                    <span>Image unavailable</span>
+                    <span>{recipe.image?.url ? 'Image unavailable' : 'No photo provided'}</span>
                     {recipe.image?.url && (
                       <img src={recipe.image.url} alt={recipe.image.alt || recipe.title}
                         loading="lazy" onError={(event) => { event.currentTarget.hidden = true; }} />
