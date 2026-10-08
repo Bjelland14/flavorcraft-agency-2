@@ -1,6 +1,8 @@
 # FlavorCraft 
 Recipe discovery web app for FlavorCraft Labs – Team Beta (Agency 2)
 
+**Live site:** https://flavorcraft-team-beta.netlify.app
+
 ## Installation
 
 Clone the repository:
