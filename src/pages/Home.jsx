@@ -5,7 +5,7 @@ import { getRecipes } from '../api/recipes';
 import { filterRecipes } from '../utils/filterRecipes';
 import '../styles/home.css';
 
-function Home({ search = '', diet = '', time = '' }) {
+function Home({ search = '', category = '', diet = '', time = '', onCategoriesLoad }) {
   const [result, setResult] = useState({ status: 'loading', recipes: [] });
   const [attempt, setAttempt] = useState(0);
 
@@ -14,23 +14,29 @@ function Home({ search = '', diet = '', time = '' }) {
 
     getRecipes({ signal: controller.signal })
       .then((recipes) => {
-        if (!controller.signal.aborted) setResult({ status: 'success', recipes });
+        if (!controller.signal.aborted) {
+          setResult({ status: 'success', recipes });
+          const categories = [...new Set(
+            recipes.map((recipe) => recipe.category).filter((value) => typeof value === 'string' && value)
+          )].sort();
+          onCategoriesLoad(categories);
+        }
       })
       .catch(() => {
         if (!controller.signal.aborted) setResult({ status: 'error', recipes: [] });
       });
 
     return () => controller.abort();
-  }, [attempt]);
+  }, [attempt, onCategoriesLoad]);
 
-  const recipes = filterRecipes(result.recipes, { search, diet, time });
-  const hasFilters = search.trim() || diet || time;
+  const recipes = filterRecipes(result.recipes, { search, category, diet, time });
+  const hasFilters = search.trim() || category || diet || time;
 
   return (
     <main className="content">
       <section className="recipe-area" aria-labelledby="view-heading">
         <h2 id="view-heading">
-          {search.trim() ? 'Search results' : 'Tonight for your family'}
+          {search.trim() ? 'Search results' : category ? `${category} recipes` : 'Tonight for your family'}
         </h2>
         {result.status === 'loading' && (
           <p className="empty-state" role="status">Loading recipes...</p>
@@ -49,7 +55,7 @@ function Home({ search = '', diet = '', time = '' }) {
         )}
         {result.status === 'success' && recipes.length === 0 && (
           <p className="empty-state" role="status">
-            {hasFilters ? 'No recipes match your search or filters.' : 'No recipes yet.'}
+            {hasFilters ? 'No results found.' : 'No recipes yet.'}
           </p>
         )}
         {result.status === 'success' && recipes.length > 0 && (
