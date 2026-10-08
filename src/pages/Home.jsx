@@ -5,6 +5,11 @@ import { getRecipes } from '../api/recipes';
 import { filterRecipes } from '../utils/filterRecipes';
 import '../styles/home.css';
 
+function formatCategory(category) {
+  const value = category.trim().toLowerCase();
+  return value ? `${value[0].toUpperCase()}${value.slice(1)}` : '';
+}
+
 function Home({ search = '', category = '', diet = '', time = '', onCategoriesLoad }) {
   const [result, setResult] = useState({ status: 'loading', recipes: [] });
   const [attempt, setAttempt] = useState(0);
@@ -17,8 +22,12 @@ function Home({ search = '', category = '', diet = '', time = '', onCategoriesLo
         if (!controller.signal.aborted) {
           setResult({ status: 'success', recipes });
           const categories = [...new Set(
-            recipes.map((recipe) => recipe.category).filter((value) => typeof value === 'string' && value)
-          )].sort();
+            recipes
+              .map((recipe) => recipe.category)
+              .filter((value) => typeof value === 'string')
+              .map(formatCategory)
+              .filter(Boolean)
+          )].sort((first, second) => first.localeCompare(second));
           onCategoriesLoad(categories);
         }
       })

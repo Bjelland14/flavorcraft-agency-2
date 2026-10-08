@@ -58,9 +58,9 @@ function Header({
               Diet
               <select value={diet} onChange={(event) => onDietChange(event.target.value)}>
                 <option value="">Any diet</option>
-                <option value="vegetarian">Vegetarian</option>
-                <option value="vegan">Vegan</option>
                 <option value="gluten-free">Gluten-free</option>
+                <option value="vegan">Vegan</option>
+                <option value="vegetarian">Vegetarian</option>
               </select>
             </label>
             <label>

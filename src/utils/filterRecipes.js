@@ -10,7 +10,8 @@ export function filterRecipes(recipes, { search = '', category = '', diet = '', 
       typeof value === 'string' && value.toLowerCase().includes(query)
     );
     const matchesCategory = !category || (
-      typeof recipe.category === 'string' && recipe.category.toLowerCase() === category.toLowerCase()
+      typeof recipe.category === 'string' &&
+      recipe.category.trim().toLowerCase() === category.trim().toLowerCase()
     );
     const matchesDiet = !diet || tags.some((tag) =>
       typeof tag === 'string' && tag.toLowerCase().replaceAll(' ', '-') === diet
