@@ -3,7 +3,18 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { Search01Icon, FilterHorizontalIcon } from '@hugeicons/core-free-icons';
 import '../../styles/header.css';
 
-function Header({ showSearch, search, onSearchChange, diet, onDietChange, time, onTimeChange }) {
+function Header({
+  showSearch,
+  search,
+  onSearchChange,
+  category,
+  onCategoryChange,
+  categories,
+  diet,
+  onDietChange,
+  time,
+  onTimeChange,
+}) {
   const [filtersOpen, setFiltersOpen] = useState(false);
 
   return (
@@ -35,12 +46,21 @@ function Header({ showSearch, search, onSearchChange, diet, onDietChange, time, 
           </button>
           <div id="recipe-filters" className="filters" hidden={!filtersOpen}>
             <label>
+              Category
+              <select value={category} onChange={(event) => onCategoryChange(event.target.value)}>
+                <option value="">All categories</option>
+                {categories.map((recipeCategory) => (
+                  <option key={recipeCategory} value={recipeCategory}>{recipeCategory}</option>
+                ))}
+              </select>
+            </label>
+            <label>
               Diet
               <select value={diet} onChange={(event) => onDietChange(event.target.value)}>
                 <option value="">Any diet</option>
-                <option value="vegetarian">Vegetarian</option>
-                <option value="vegan">Vegan</option>
                 <option value="gluten-free">Gluten-free</option>
+                <option value="vegan">Vegan</option>
+                <option value="vegetarian">Vegetarian</option>
               </select>
             </label>
             <label>

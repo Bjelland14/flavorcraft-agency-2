@@ -6,7 +6,12 @@ import { filterRecipes } from '../utils/filterRecipes';
 import { isFeedRecipe } from '../utils/isFeedRecipe';
 import '../styles/home.css';
 
-function Home({ search = '', diet = '', time = '' }) {
+function formatCategory(category) {
+  const value = category.trim().toLowerCase();
+  return value ? `${value[0].toUpperCase()}${value.slice(1)}` : '';
+}
+
+function Home({ search = '', category = '', diet = '', time = '', onCategoriesLoad }) {
   const [result, setResult] = useState({ status: 'loading', recipes: [] });
   const [attempt, setAttempt] = useState(0);
 
@@ -16,7 +21,16 @@ function Home({ search = '', diet = '', time = '' }) {
     getRecipes({ signal: controller.signal })
       .then((recipes) => {
         if (!controller.signal.aborted) {
-          setResult({ status: 'success', recipes: recipes.filter(isFeedRecipe) });
+          const feedRecipes = recipes.filter(isFeedRecipe);
+          setResult({ status: 'success', recipes: feedRecipes });
+          const categories = [...new Set(
+            feedRecipes
+              .map((recipe) => recipe.category)
+              .filter((value) => typeof value === 'string')
+              .map(formatCategory)
+              .filter(Boolean)
+          )].sort((first, second) => first.localeCompare(second));
+          onCategoriesLoad(categories);
         }
       })
       .catch(() => {
@@ -24,16 +38,16 @@ function Home({ search = '', diet = '', time = '' }) {
       });
 
     return () => controller.abort();
-  }, [attempt]);
+  }, [attempt, onCategoriesLoad]);
 
-  const recipes = filterRecipes(result.recipes, { search, diet, time });
-  const hasFilters = search.trim() || diet || time;
+  const recipes = filterRecipes(result.recipes, { search, category, diet, time });
+  const hasFilters = search.trim() || category || diet || time;
 
   return (
     <main className="content">
       <section className="recipe-area" aria-labelledby="view-heading">
         <h2 id="view-heading">
-          {search.trim() ? 'Search results' : 'Tonight for your family'}
+          {search.trim() ? 'Search results' : category ? `${category} recipes` : 'Tonight for your family'}
         </h2>
         {result.status === 'loading' && (
           <p className="empty-state" role="status">Loading recipes...</p>
@@ -52,7 +66,7 @@ function Home({ search = '', diet = '', time = '' }) {
         )}
         {result.status === 'success' && recipes.length === 0 && (
           <p className="empty-state" role="status">
-            {hasFilters ? 'No recipes match your search or filters.' : 'No recipes yet.'}
+            {hasFilters ? 'No results found.' : 'No recipes yet.'}
           </p>
         )}
         {result.status === 'success' && recipes.length > 0 && (
