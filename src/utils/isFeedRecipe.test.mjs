@@ -55,6 +55,23 @@ test('hides zero total time but preserves recipes with only prep or cooking time
   assert.equal(isFeedRecipe({ ...recipe, prepTime: 0, cookTime: 20 }), true);
 });
 
+test('hides descriptions containing only test or testing', () => {
+  for (const description of ['test', 'testing', ' TESTING ', 'Test.', 'testing!', 'Testing?']) {
+    assert.equal(isFeedRecipe({ ...recipe, description }), false, description);
+  }
+  assert.equal(isFeedRecipe({ ...recipe, description: 'Testing a family recipe with fresh tomatoes.' }), true);
+});
+
+test('search excludes the review-reported testing entry but keeps complete recipes mentioning testing', () => {
+  const complete = { ...recipe, id: 'complete-pasta', title: 'Creamy Garlic Pasta',
+    description: 'A quick pasta dish, perfect for testing the recipe form.' };
+  const unfinished = { ...recipe, id: 'unfinished-pasta', title: 'Spagetti', description: 'testing' };
+  const visible = [complete, unfinished].filter(isFeedRecipe);
+  assert.deepEqual(filterRecipes(visible, { search: 'test' }), [complete]);
+  assert.deepEqual(filterRecipes(visible, { search: 'Spagetti' }), []);
+  assert.deepEqual(filterRecipes(visible), [complete]);
+});
+
 test('handles missing, empty, and malformed content safely', () => {
   for (const value of [null, undefined, {}, { ...recipe, ingredients: [] },
     { ...recipe, ingredients: [null] }, { ...recipe, ingredients: [{ name: ' ' }] },

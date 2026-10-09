@@ -19,7 +19,8 @@ export function isFeedRecipe(recipe) {
 
   const title = normalizeText(recipe.title);
   const description = normalizeText(recipe.description);
-  if (!title || TEST_TITLES.has(title) || !description || description.includes('lorem ipsum')) {
+  if (!title || TEST_TITLES.has(title) || !description || description.includes('lorem ipsum') ||
+    /^test(?:ing)?[.!?]*$/.test(description)) {
     return false;
   }
 
