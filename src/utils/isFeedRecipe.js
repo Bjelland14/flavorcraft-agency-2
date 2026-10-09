@@ -17,9 +17,14 @@ function hasRealContent(value) {
 export function isFeedRecipe(recipe) {
   if (!recipe) return false;
 
+  if (typeof recipe.image?.url !== 'string' || !recipe.image.url.trim()) {
+    return false;
+  }
+
   const title = normalizeText(recipe.title);
   const description = normalizeText(recipe.description);
-  if (!title || TEST_TITLES.has(title) || !description || description.includes('lorem ipsum')) {
+  if (!title || TEST_TITLES.has(title) || !description || description.includes('lorem ipsum') ||
+    /^test(?:ing)?[.!?]*$/.test(description)) {
     return false;
   }
 
