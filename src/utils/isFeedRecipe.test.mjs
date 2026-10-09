@@ -7,6 +7,7 @@ const recipe = {
   id: 'real-recipe',
   title: 'Tomato salad',
   description: 'Fresh tomatoes with olive oil.',
+  image: { url: 'https://example.com/tomato-salad.jpg', alt: 'Tomato salad' },
   prepTime: 10,
   cookTime: 0,
   tags: ['Vegan'],
@@ -83,7 +84,18 @@ test('handles missing, empty, and malformed content safely', () => {
   }
 });
 
-test('keeps complete recipes regardless of duplicate titles, missing images, or mentions of testing', () => {
+test('hides recipes without a photo URL', () => {
+  for (const image of [undefined, null, {}, { url: '' }, { url: '   ' }, { url: null }, { url: 123 }]) {
+    assert.equal(isFeedRecipe({ ...recipe, image }), false);
+  }
+  assert.equal(isFeedRecipe(recipe), true);
+  const visible = [recipe, { ...recipe, id: 'no-photo', title: 'Chickpea Special', image: null }]
+    .filter(isFeedRecipe);
+  assert.deepEqual(filterRecipes(visible, { search: 'Chickpea' }), []);
+  assert.deepEqual(filterRecipes(visible), [recipe]);
+});
+
+test('keeps complete recipes with photos regardless of duplicate titles or mentions of testing', () => {
   const complete = [recipe, { ...recipe, id: 'another-recipe', description: 'A complete recipe used for testing.' }];
   assert.deepEqual(complete.filter(isFeedRecipe), complete);
   assert.equal(isFeedRecipe({ ...recipe, title: 'Tiramisu' }), true);
