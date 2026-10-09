@@ -3,6 +3,7 @@ import { HugeiconsIcon } from '@hugeicons/react';
 import { RefreshIcon } from '@hugeicons/core-free-icons';
 import { getRecipes } from '../api/recipes';
 import { filterRecipes } from '../utils/filterRecipes';
+import { isFeedRecipe } from '../utils/isFeedRecipe';
 import '../styles/home.css';
 
 function formatCategory(category) {
@@ -20,9 +21,10 @@ function Home({ search = '', category = '', diet = '', time = '', onCategoriesLo
     getRecipes({ signal: controller.signal })
       .then((recipes) => {
         if (!controller.signal.aborted) {
-          setResult({ status: 'success', recipes });
+          const feedRecipes = recipes.filter(isFeedRecipe);
+          setResult({ status: 'success', recipes: feedRecipes });
           const categories = [...new Set(
-            recipes
+            feedRecipes
               .map((recipe) => recipe.category)
               .filter((value) => typeof value === 'string')
               .map(formatCategory)
@@ -64,7 +66,7 @@ function Home({ search = '', category = '', diet = '', time = '', onCategoriesLo
         )}
         {result.status === 'success' && recipes.length === 0 && (
           <p className="empty-state" role="status">
-            {hasFilters ? 'No results found.' : 'No recipes yet.'}
+            {hasFilters ? 'No recipes match your search or filters.' : 'No recipes yet.'}
           </p>
         )}
         {result.status === 'success' && recipes.length > 0 && (
@@ -76,7 +78,7 @@ function Home({ search = '', category = '', diet = '', time = '', onCategoriesLo
               {recipes.map((recipe) => (
                 <li key={recipe.id} className="recipe-card">
                   <div className="recipe-image">
-                    <span>Image unavailable</span>
+                    <span>{recipe.image?.url ? 'Image unavailable' : 'No photo provided'}</span>
                     {recipe.image?.url && (
                       <img src={recipe.image.url} alt={recipe.image.alt || recipe.title}
                         loading="lazy" onError={(event) => { event.currentTarget.hidden = true; }} />
