@@ -5,6 +5,7 @@ import Footer from './assets/components/Footer';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import RecipeDetail from './pages/RecipeDetail';
+import useFavoriteRecipes from './hooks/useFavoriteRecipes';
 
 function App() {
   const [search, setSearch] = useState('');
@@ -14,6 +15,7 @@ function App() {
   const [diet, setDiet] = useState('');
   const [time, setTime] = useState('');
   const { pathname } = useLocation();
+  const { favorites, toggleFavorite } = useFavoriteRecipes();
 
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedSearch(search), 350);
@@ -37,10 +39,12 @@ function App() {
               diet={diet}
               time={time}
               onCategoriesLoad={setCategories}
+              favorites={favorites}
+              onToggleFavorite={toggleFavorite}
             />
           }
         />
-        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/favorites" element={<Favorites favorites={favorites} onToggleFavorite={toggleFavorite} />} />
         <Route path="/recipe" element={<RecipeDetail />} />
       </Routes>
       <Footer />
