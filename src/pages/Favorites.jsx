@@ -1,11 +1,25 @@
 import '../styles/home.css';
+import RecipeCard from '../assets/components/RecipeCard';
 
-function Favorites() {
+function Favorites({ favorites, onToggleFavorite }) {
   return (
     <main className="content">
       <section className="recipe-area" aria-labelledby="favorites-heading">
         <h2 id="favorites-heading">Favorites</h2>
-        <p className="empty-state" role="status">No favorites yet.</p>
+        {favorites.length === 0 ? (
+          <p className="empty-state" role="status">No favorites yet.</p>
+        ) : (
+          <>
+            <p className="recipe-count" role="status">
+              {favorites.length} {favorites.length === 1 ? 'recipe' : 'recipes'}
+            </p>
+            <ul className="recipe-grid">
+              {favorites.map((recipe) => (
+                <RecipeCard key={recipe.id} recipe={recipe} isFavorite onToggleFavorite={onToggleFavorite} />
+              ))}
+            </ul>
+          </>
+        )}
       </section>
     </main>
   );
