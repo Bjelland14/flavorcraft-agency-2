@@ -1,0 +1,705 @@
+[
+  {
+    "id": "local-01",
+    "title": "Friday tacos",
+    "description": "The classic Norwegian Friday dinner. Everyone builds their own.",
+    "prepTime": 10,
+    "cookTime": 15,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Minced beef", "quantity": 400, "unit": "g"},
+      {"name": "Taco spice mix", "quantity": 1, "unit": "pack"},
+      {"name": "Water", "quantity": 100, "unit": "ml"},
+      {"name": "Taco shells or tortillas", "quantity": 8, "unit": "pcs"},
+      {"name": "Iceberg lettuce", "quantity": 0.5, "unit": "head"},
+      {"name": "Tomatoes", "quantity": 2, "unit": "pcs"},
+      {"name": "Cucumber", "quantity": 0.5, "unit": "pcs"},
+      {"name": "Grated cheese", "quantity": 150, "unit": "g"},
+      {"name": "Sour cream", "quantity": 200, "unit": "ml"},
+      {"name": "Taco sauce", "quantity": 1, "unit": "jar"}
+    ],
+    "instructions": [
+      "Brown the minced beef in a pan.",
+      "Add the taco spice and water, and let it simmer for 5 minutes.",
+      "Chop the lettuce, tomatoes and cucumber.",
+      "Warm the taco shells or tortillas.",
+      "Put everything on the table and let everyone build their own tacos."
+    ],
+    "tags": ["norwegian", "everyday", "quick", "family"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": false, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-02",
+    "title": "Homemade pizza",
+    "description": "A simple homemade pizza with ham and cheese.",
+    "prepTime": 20,
+    "cookTime": 15,
+    "servings": 4,
+    "difficulty": "Medium",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Wheat flour", "quantity": 500, "unit": "g"},
+      {"name": "Dry yeast", "quantity": 1, "unit": "pack"},
+      {"name": "Lukewarm water", "quantity": 300, "unit": "ml"},
+      {"name": "Olive oil", "quantity": 2, "unit": "tbsp"},
+      {"name": "Salt", "quantity": 1, "unit": "tsp"},
+      {"name": "Tomato sauce", "quantity": 200, "unit": "ml"},
+      {"name": "Grated cheese", "quantity": 250, "unit": "g"},
+      {"name": "Ham", "quantity": 150, "unit": "g"},
+      {"name": "Bell pepper", "quantity": 1, "unit": "pcs"}
+    ],
+    "instructions": [
+      "Mix flour, yeast, salt, oil and water into a dough.",
+      "Let the dough rise for 30 minutes.",
+      "Roll out the dough on a baking tray.",
+      "Spread tomato sauce, then add cheese, ham and bell pepper.",
+      "Bake at 250°C for 12–15 minutes."
+    ],
+    "tags": ["norwegian", "everyday", "family"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": false, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-03",
+    "title": "Meatcakes in brown sauce",
+    "description": "Homemade meatcakes in brown sauce, served with potatoes and peas.",
+    "prepTime": 20,
+    "cookTime": 30,
+    "servings": 4,
+    "difficulty": "Medium",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Minced beef", "quantity": 500, "unit": "g"},
+      {"name": "Egg", "quantity": 1, "unit": "pcs"},
+      {"name": "Milk", "quantity": 100, "unit": "ml"},
+      {"name": "Breadcrumbs", "quantity": 3, "unit": "tbsp"},
+      {"name": "Salt", "quantity": 1, "unit": "tsp"},
+      {"name": "Butter", "quantity": 2, "unit": "tbsp"},
+      {"name": "Wheat flour", "quantity": 2, "unit": "tbsp"},
+      {"name": "Beef stock", "quantity": 500, "unit": "ml"},
+      {"name": "Potatoes", "quantity": 800, "unit": "g"},
+      {"name": "Green peas", "quantity": 200, "unit": "g"}
+    ],
+    "instructions": [
+      "Mix minced beef, egg, milk, breadcrumbs and salt.",
+      "Shape into flat cakes and brown them in butter.",
+      "Boil the potatoes.",
+      "Brown the flour in butter, add the stock and whisk into a sauce.",
+      "Let the meatcakes simmer in the sauce for 15 minutes.",
+      "Serve with potatoes and peas."
+    ],
+    "tags": ["norwegian", "everyday", "classic"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": false, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-04",
+    "title": "Fish gratin",
+    "description": "A mild and creamy fish gratin with macaroni.",
+    "prepTime": 15,
+    "cookTime": 40,
+    "servings": 4,
+    "difficulty": "Medium",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Cod fillet", "quantity": 500, "unit": "g"},
+      {"name": "Macaroni", "quantity": 150, "unit": "g"},
+      {"name": "Butter", "quantity": 3, "unit": "tbsp"},
+      {"name": "Wheat flour", "quantity": 4, "unit": "tbsp"},
+      {"name": "Milk", "quantity": 600, "unit": "ml"},
+      {"name": "Eggs", "quantity": 2, "unit": "pcs"},
+      {"name": "Grated cheese", "quantity": 100, "unit": "g"},
+      {"name": "Breadcrumbs", "quantity": 2, "unit": "tbsp"},
+      {"name": "Salt", "quantity": 1, "unit": "tsp"}
+    ],
+    "instructions": [
+      "Boil the macaroni.",
+      "Melt the butter, stir in the flour and add the milk to make a white sauce.",
+      "Let the sauce cool a little and stir in the eggs.",
+      "Cut the fish into pieces and mix with the macaroni and sauce.",
+      "Pour into a dish and top with cheese and breadcrumbs.",
+      "Bake at 200°C for 30–40 minutes."
+    ],
+    "tags": ["norwegian", "everyday", "classic", "fish"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": false, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-05",
+    "title": "Spaghetti bolognese",
+    "description": "A quick everyday pasta with meat sauce.",
+    "prepTime": 10,
+    "cookTime": 25,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Minced beef", "quantity": 400, "unit": "g"},
+      {"name": "Onion", "quantity": 1, "unit": "pcs"},
+      {"name": "Garlic", "quantity": 2, "unit": "cloves"},
+      {"name": "Chopped tomatoes", "quantity": 2, "unit": "cans"},
+      {"name": "Tomato paste", "quantity": 2, "unit": "tbsp"},
+      {"name": "Dried oregano", "quantity": 1, "unit": "tsp"},
+      {"name": "Spaghetti", "quantity": 400, "unit": "g"},
+      {"name": "Olive oil", "quantity": 1, "unit": "tbsp"},
+      {"name": "Salt", "quantity": 1, "unit": "tsp"}
+    ],
+    "instructions": [
+      "Chop the onion and garlic and fry in olive oil.",
+      "Add the minced beef and brown it.",
+      "Add tomatoes, tomato paste and oregano and simmer for 20 minutes.",
+      "Boil the spaghetti.",
+      "Serve the sauce over the spaghetti."
+    ],
+    "tags": ["norwegian", "everyday", "quick", "family"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": true, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-06",
+    "title": "Fish cakes with potatoes and carrots",
+    "description": "Homemade fish cakes, served with boiled potatoes and carrots.",
+    "prepTime": 20,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "Medium",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Haddock fillet", "quantity": 500, "unit": "g"},
+      {"name": "Potato starch", "quantity": 2, "unit": "tbsp"},
+      {"name": "Milk", "quantity": 150, "unit": "ml"},
+      {"name": "Salt", "quantity": 1, "unit": "tsp"},
+      {"name": "Nutmeg", "quantity": 0.25, "unit": "tsp"},
+      {"name": "Butter", "quantity": 2, "unit": "tbsp"},
+      {"name": "Potatoes", "quantity": 800, "unit": "g"},
+      {"name": "Carrots", "quantity": 4, "unit": "pcs"}
+    ],
+    "instructions": [
+      "Blend the fish with salt, nutmeg and potato starch.",
+      "Add the milk little by little while blending.",
+      "Shape into cakes and fry in butter.",
+      "Boil the potatoes and carrots.",
+      "Serve together."
+    ],
+    "tags": ["norwegian", "everyday", "fish"],
+    "image": null,
+    "dietary": {"glutenFree": true, "lactoseFree": false, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-07",
+    "title": "Oven-baked salmon with potatoes and broccoli",
+    "description": "An easy and healthy salmon dinner on one tray.",
+    "prepTime": 10,
+    "cookTime": 25,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Salmon fillet", "quantity": 600, "unit": "g"},
+      {"name": "Baby potatoes", "quantity": 800, "unit": "g"},
+      {"name": "Broccoli", "quantity": 1, "unit": "head"},
+      {"name": "Olive oil", "quantity": 3, "unit": "tbsp"},
+      {"name": "Lemon", "quantity": 1, "unit": "pcs"},
+      {"name": "Salt", "quantity": 1, "unit": "tsp"},
+      {"name": "Black pepper", "quantity": 0.5, "unit": "tsp"}
+    ],
+    "instructions": [
+      "Cut the potatoes in half and bake at 220°C for 10 minutes with olive oil and salt.",
+      "Add the salmon and broccoli to the tray.",
+      "Season with salt, pepper and lemon.",
+      "Bake for another 15 minutes."
+    ],
+    "tags": ["norwegian", "everyday", "quick", "fish", "one-tray"],
+    "image": null,
+    "dietary": {"glutenFree": true, "lactoseFree": true, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-08",
+    "title": "Chicken stew with rice",
+    "description": "A mild chicken stew with coconut milk, served with rice.",
+    "prepTime": 10,
+    "cookTime": 25,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Chicken breast", "quantity": 500, "unit": "g"},
+      {"name": "Onion", "quantity": 1, "unit": "pcs"},
+      {"name": "Bell pepper", "quantity": 1, "unit": "pcs"},
+      {"name": "Coconut milk", "quantity": 400, "unit": "ml"},
+      {"name": "Curry powder", "quantity": 2, "unit": "tsp"},
+      {"name": "Chopped tomatoes", "quantity": 1, "unit": "can"},
+      {"name": "Rice", "quantity": 300, "unit": "g"},
+      {"name": "Oil", "quantity": 1, "unit": "tbsp"},
+      {"name": "Salt", "quantity": 1, "unit": "tsp"}
+    ],
+    "instructions": [
+      "Boil the rice.",
+      "Cut the chicken, onion and bell pepper into pieces.",
+      "Fry the chicken and onion in oil with curry powder.",
+      "Add bell pepper, tomatoes and coconut milk and simmer for 15 minutes.",
+      "Serve with rice."
+    ],
+    "tags": ["norwegian", "everyday", "family"],
+    "image": null,
+    "dietary": {"glutenFree": true, "lactoseFree": true, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-09",
+    "title": "Pancakes with bacon",
+    "description": "Norwegian thin pancakes, served with crispy bacon and jam.",
+    "prepTime": 10,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Wheat flour", "quantity": 250, "unit": "g"},
+      {"name": "Milk", "quantity": 600, "unit": "ml"},
+      {"name": "Eggs", "quantity": 3, "unit": "pcs"},
+      {"name": "Salt", "quantity": 0.5, "unit": "tsp"},
+      {"name": "Butter", "quantity": 2, "unit": "tbsp"},
+      {"name": "Bacon", "quantity": 200, "unit": "g"},
+      {"name": "Jam", "quantity": 1, "unit": "jar"}
+    ],
+    "instructions": [
+      "Whisk flour, milk, eggs and salt into a batter.",
+      "Let the batter rest for 10 minutes.",
+      "Fry the bacon until crispy.",
+      "Fry thin pancakes in butter.",
+      "Serve with bacon and jam."
+    ],
+    "tags": ["norwegian", "everyday", "family"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": false, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-10",
+    "title": "Norwegian beef stew (Lapskaus)",
+    "description": "A hearty stew with beef, potatoes and root vegetables.",
+    "prepTime": 20,
+    "cookTime": 60,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Beef chuck", "quantity": 500, "unit": "g"},
+      {"name": "Potatoes", "quantity": 800, "unit": "g"},
+      {"name": "Carrots", "quantity": 3, "unit": "pcs"},
+      {"name": "Swede", "quantity": 0.5, "unit": "pcs"},
+      {"name": "Onion", "quantity": 1, "unit": "pcs"},
+      {"name": "Water", "quantity": 1, "unit": "l"},
+      {"name": "Salt", "quantity": 1.5, "unit": "tsp"},
+      {"name": "Black pepper", "quantity": 0.5, "unit": "tsp"}
+    ],
+    "instructions": [
+      "Cut the meat into cubes and brown it in a pot.",
+      "Add water and let it simmer for 30 minutes.",
+      "Cut potatoes, carrots, swede and onion into cubes.",
+      "Add the vegetables and simmer for another 30 minutes.",
+      "Season with salt and pepper."
+    ],
+    "tags": ["norwegian", "everyday", "classic", "one-pot"],
+    "image": null,
+    "dietary": {"glutenFree": true, "lactoseFree": true, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-11",
+    "title": "Lamb and cabbage stew (Fårikål)",
+    "description": "Norway's national dish: lamb and cabbage cooked slowly with whole peppercorns.",
+    "prepTime": 15,
+    "cookTime": 120,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Lamb on the bone", "quantity": 1.2, "unit": "kg"},
+      {"name": "White cabbage", "quantity": 1.5, "unit": "kg"},
+      {"name": "Whole black peppercorns", "quantity": 2, "unit": "tbsp"},
+      {"name": "Salt", "quantity": 2, "unit": "tsp"},
+      {"name": "Water", "quantity": 500, "unit": "ml"},
+      {"name": "Potatoes", "quantity": 800, "unit": "g"}
+    ],
+    "instructions": [
+      "Cut the cabbage into wedges.",
+      "Layer lamb and cabbage in a large pot, with salt and peppercorns between the layers.",
+      "Add the water and bring to a boil.",
+      "Let it simmer on low heat for about 2 hours.",
+      "Serve with boiled potatoes."
+    ],
+    "tags": ["norwegian", "everyday", "classic", "one-pot"],
+    "image": null,
+    "dietary": {"glutenFree": true, "lactoseFree": true, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-12",
+    "title": "Hot dogs in potato flatbread (Pølser i lompe)",
+    "description": "A quick Norwegian favourite for busy evenings.",
+    "prepTime": 5,
+    "cookTime": 10,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Sausages", "quantity": 8, "unit": "pcs"},
+      {"name": "Potato flatbreads (lomper)", "quantity": 8, "unit": "pcs"},
+      {"name": "Ketchup", "quantity": 1, "unit": "bottle"},
+      {"name": "Mustard", "quantity": 1, "unit": "bottle"},
+      {"name": "Crispy fried onions", "quantity": 50, "unit": "g"}
+    ],
+    "instructions": [
+      "Heat the sausages in hot water for about 10 minutes.",
+      "Wrap each sausage in a potato flatbread.",
+      "Serve with ketchup, mustard and crispy onions."
+    ],
+    "tags": ["norwegian", "everyday", "quick", "kids"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": false, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-13",
+    "title": "Lasagne",
+    "description": "A classic lasagne with meat sauce and white sauce.",
+    "prepTime": 25,
+    "cookTime": 45,
+    "servings": 6,
+    "difficulty": "Medium",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Minced beef", "quantity": 500, "unit": "g"},
+      {"name": "Onion", "quantity": 1, "unit": "pcs"},
+      {"name": "Chopped tomatoes", "quantity": 2, "unit": "cans"},
+      {"name": "Lasagne sheets", "quantity": 12, "unit": "pcs"},
+      {"name": "Butter", "quantity": 3, "unit": "tbsp"},
+      {"name": "Wheat flour", "quantity": 3, "unit": "tbsp"},
+      {"name": "Milk", "quantity": 700, "unit": "ml"},
+      {"name": "Grated cheese", "quantity": 200, "unit": "g"},
+      {"name": "Salt", "quantity": 1, "unit": "tsp"}
+    ],
+    "instructions": [
+      "Make a meat sauce with minced beef, onion and tomatoes.",
+      "Make a white sauce with butter, flour and milk.",
+      "Layer lasagne sheets, meat sauce and white sauce in a dish.",
+      "Top with cheese.",
+      "Bake at 200°C for 40–45 minutes."
+    ],
+    "tags": ["norwegian", "everyday", "family"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": false, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-14",
+    "title": "Chicken stir-fry with vegetables",
+    "description": "A fast stir-fry with chicken, vegetables and rice.",
+    "prepTime": 10,
+    "cookTime": 15,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Chicken breast", "quantity": 500, "unit": "g"},
+      {"name": "Wok vegetables", "quantity": 600, "unit": "g"},
+      {"name": "Gluten-free soy sauce (tamari)", "quantity": 4, "unit": "tbsp"},
+      {"name": "Garlic", "quantity": 2, "unit": "cloves"},
+      {"name": "Fresh ginger", "quantity": 1, "unit": "tbsp"},
+      {"name": "Oil", "quantity": 2, "unit": "tbsp"},
+      {"name": "Rice", "quantity": 300, "unit": "g"}
+    ],
+    "instructions": [
+      "Boil the rice.",
+      "Cut the chicken into strips and fry in hot oil.",
+      "Add garlic, ginger and the vegetables.",
+      "Stir-fry for 5 minutes and add the soy sauce.",
+      "Serve with rice."
+    ],
+    "tags": ["norwegian", "everyday", "quick"],
+    "image": null,
+    "dietary": {"glutenFree": true, "lactoseFree": true, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-15",
+    "title": "Tomato soup with egg and macaroni",
+    "description": "A cheap and cosy tomato soup with boiled eggs and macaroni.",
+    "prepTime": 5,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Chopped tomatoes", "quantity": 2, "unit": "cans"},
+      {"name": "Vegetable stock", "quantity": 700, "unit": "ml"},
+      {"name": "Onion", "quantity": 1, "unit": "pcs"},
+      {"name": "Macaroni", "quantity": 150, "unit": "g"},
+      {"name": "Eggs", "quantity": 4, "unit": "pcs"},
+      {"name": "Olive oil", "quantity": 1, "unit": "tbsp"},
+      {"name": "Salt", "quantity": 1, "unit": "tsp"}
+    ],
+    "instructions": [
+      "Fry the chopped onion in olive oil.",
+      "Add tomatoes and stock and simmer for 10 minutes.",
+      "Blend the soup until smooth.",
+      "Boil the macaroni in the soup.",
+      "Boil the eggs, cut them in half and serve on top."
+    ],
+    "tags": ["norwegian", "everyday", "quick", "vegetarian"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": true, "vegetarian": true},
+    "source": "static"
+  },
+  {
+    "id": "local-16",
+    "title": "Homemade burger",
+    "description": "Juicy homemade burgers with all the toppings.",
+    "prepTime": 15,
+    "cookTime": 15,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Minced beef", "quantity": 600, "unit": "g"},
+      {"name": "Salt", "quantity": 1, "unit": "tsp"},
+      {"name": "Black pepper", "quantity": 0.5, "unit": "tsp"},
+      {"name": "Burger buns", "quantity": 4, "unit": "pcs"},
+      {"name": "Cheese slices", "quantity": 4, "unit": "pcs"},
+      {"name": "Lettuce", "quantity": 4, "unit": "leaves"},
+      {"name": "Tomato", "quantity": 1, "unit": "pcs"},
+      {"name": "Red onion", "quantity": 1, "unit": "pcs"},
+      {"name": "Burger dressing", "quantity": 4, "unit": "tbsp"}
+    ],
+    "instructions": [
+      "Shape the minced beef into 4 burgers and season with salt and pepper.",
+      "Fry or grill for 3–4 minutes on each side.",
+      "Add a cheese slice at the end.",
+      "Toast the buns.",
+      "Build the burgers with lettuce, tomato, onion and dressing."
+    ],
+    "tags": ["norwegian", "everyday", "family"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": false, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-17",
+    "title": "Cod with potatoes and butter",
+    "description": "Simple poached cod with boiled potatoes and melted butter.",
+    "prepTime": 10,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Cod fillet", "quantity": 600, "unit": "g"},
+      {"name": "Potatoes", "quantity": 800, "unit": "g"},
+      {"name": "Butter", "quantity": 75, "unit": "g"},
+      {"name": "Salt", "quantity": 2, "unit": "tsp"},
+      {"name": "Fresh parsley", "quantity": 1, "unit": "tbsp"}
+    ],
+    "instructions": [
+      "Boil the potatoes.",
+      "Bring lightly salted water to a simmer and poach the cod for 6–8 minutes.",
+      "Melt the butter.",
+      "Serve the cod with potatoes, melted butter and parsley."
+    ],
+    "tags": ["norwegian", "everyday", "classic", "fish"],
+    "image": null,
+    "dietary": {"glutenFree": true, "lactoseFree": false, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-18",
+    "title": "Meatballs in tomato sauce",
+    "description": "Kid-friendly meatballs in tomato sauce, served with spaghetti.",
+    "prepTime": 15,
+    "cookTime": 25,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Minced beef", "quantity": 500, "unit": "g"},
+      {"name": "Egg", "quantity": 1, "unit": "pcs"},
+      {"name": "Breadcrumbs", "quantity": 3, "unit": "tbsp"},
+      {"name": "Salt", "quantity": 1, "unit": "tsp"},
+      {"name": "Chopped tomatoes", "quantity": 2, "unit": "cans"},
+      {"name": "Garlic", "quantity": 2, "unit": "cloves"},
+      {"name": "Olive oil", "quantity": 1, "unit": "tbsp"},
+      {"name": "Spaghetti", "quantity": 400, "unit": "g"}
+    ],
+    "instructions": [
+      "Mix minced beef, egg, breadcrumbs and salt, and roll into small balls.",
+      "Brown the meatballs in olive oil.",
+      "Add garlic and tomatoes and simmer for 15 minutes.",
+      "Boil the spaghetti.",
+      "Serve the meatballs and sauce over the spaghetti."
+    ],
+    "tags": ["norwegian", "everyday", "kids", "family"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": true, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-19",
+    "title": "Rice porridge (Risgrøt)",
+    "description": "Creamy Norwegian rice porridge with butter, sugar and cinnamon.",
+    "prepTime": 5,
+    "cookTime": 60,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Porridge rice", "quantity": 200, "unit": "g"},
+      {"name": "Water", "quantity": 300, "unit": "ml"},
+      {"name": "Milk", "quantity": 1.2, "unit": "l"},
+      {"name": "Salt", "quantity": 1, "unit": "tsp"},
+      {"name": "Butter", "quantity": 2, "unit": "tbsp"},
+      {"name": "Sugar", "quantity": 2, "unit": "tbsp"},
+      {"name": "Ground cinnamon", "quantity": 1, "unit": "tsp"}
+    ],
+    "instructions": [
+      "Boil the rice in water for 5 minutes.",
+      "Add the milk and bring to a boil while stirring.",
+      "Let it simmer on low heat for about 50 minutes, stirring now and then.",
+      "Season with salt.",
+      "Serve with butter, sugar and cinnamon."
+    ],
+    "tags": ["norwegian", "everyday", "classic", "vegetarian"],
+    "image": null,
+    "dietary": {"glutenFree": true, "lactoseFree": false, "vegetarian": true},
+    "source": "static"
+  },
+  {
+    "id": "local-20",
+    "title": "Frozen pizza with extra toppings",
+    "description": "The easiest dinner of all: a frozen pizza with a few extra toppings.",
+    "prepTime": 5,
+    "cookTime": 15,
+    "servings": 2,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Frozen pizza", "quantity": 1, "unit": "pcs"},
+      {"name": "Grated cheese", "quantity": 50, "unit": "g"},
+      {"name": "Pepperoni", "quantity": 50, "unit": "g"},
+      {"name": "Bell pepper", "quantity": 0.5, "unit": "pcs"},
+      {"name": "Dried oregano", "quantity": 0.5, "unit": "tsp"}
+    ],
+    "instructions": [
+      "Preheat the oven according to the package.",
+      "Add extra cheese, pepperoni and bell pepper on top of the pizza.",
+      "Sprinkle with oregano.",
+      "Bake according to the package, usually 12–15 minutes."
+    ],
+    "tags": ["norwegian", "everyday", "quick", "lazy-night"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": false, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-21",
+    "title": "Lutefisk with bacon and mushy peas",
+    "description": "A traditional Christmas dish: lutefisk with crispy bacon, mushy peas and potatoes.",
+    "prepTime": 15,
+    "cookTime": 60,
+    "servings": 4,
+    "difficulty": "Medium",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Lutefisk", "quantity": 1.2, "unit": "kg"},
+      {"name": "Bacon", "quantity": 250, "unit": "g"},
+      {"name": "Dried green peas", "quantity": 250, "unit": "g"},
+      {"name": "Potatoes", "quantity": 800, "unit": "g"},
+      {"name": "Salt", "quantity": 2, "unit": "tsp"},
+      {"name": "Black pepper", "quantity": 0.5, "unit": "tsp"}
+    ],
+    "instructions": [
+      "Soak the dried peas overnight, then boil them until soft (about 45 minutes) and mash them.",
+      "Boil the potatoes.",
+      "Place the lutefisk in a dish, sprinkle with salt and cover with foil.",
+      "Bake at 200°C for 30–40 minutes.",
+      "Fry the bacon until crispy.",
+      "Serve the fish with bacon, mushy peas, potatoes and black pepper."
+    ],
+    "tags": ["norwegian", "everyday", "traditional", "christmas", "fish"],
+    "image": null,
+    "dietary": {"glutenFree": true, "lactoseFree": true, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-22",
+    "title": "Reindeer sausage with mashed potatoes and lingonberries",
+    "description": "A taste of northern Norway that's quick to make on a weekday.",
+    "prepTime": 10,
+    "cookTime": 20,
+    "servings": 4,
+    "difficulty": "Easy",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Reindeer sausages", "quantity": 8, "unit": "pcs"},
+      {"name": "Potatoes", "quantity": 800, "unit": "g"},
+      {"name": "Milk", "quantity": 150, "unit": "ml"},
+      {"name": "Butter", "quantity": 2, "unit": "tbsp"},
+      {"name": "Salt", "quantity": 1, "unit": "tsp"},
+      {"name": "Lingonberry jam", "quantity": 4, "unit": "tbsp"}
+    ],
+    "instructions": [
+      "Boil the potatoes until soft.",
+      "Mash them with milk, butter and salt.",
+      "Fry or heat the reindeer sausages.",
+      "Serve with the mash and lingonberry jam."
+    ],
+    "tags": ["norwegian", "everyday", "traditional"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": false, "vegetarian": false},
+    "source": "static"
+  },
+  {
+    "id": "local-23",
+    "title": "Potato dumplings (Komle)",
+    "description": "Traditional Norwegian potato dumplings, served with salted meat, sausage and swede mash.",
+    "prepTime": 30,
+    "cookTime": 45,
+    "servings": 4,
+    "difficulty": "Medium",
+    "category": "Dinner",
+    "ingredients": [
+      {"name": "Raw potatoes", "quantity": 1, "unit": "kg"},
+      {"name": "Boiled potatoes", "quantity": 300, "unit": "g"},
+      {"name": "Barley flour", "quantity": 150, "unit": "g"},
+      {"name": "Wheat flour", "quantity": 100, "unit": "g"},
+      {"name": "Salt", "quantity": 1.5, "unit": "tsp"},
+      {"name": "Salted lamb or pork", "quantity": 500, "unit": "g"},
+      {"name": "Sausages", "quantity": 4, "unit": "pcs"},
+      {"name": "Swede", "quantity": 1, "unit": "pcs"},
+      {"name": "Butter", "quantity": 50, "unit": "g"}
+    ],
+    "instructions": [
+      "Peel and finely grate the raw potatoes, and squeeze out some of the liquid.",
+      "Mash the boiled potatoes and mix everything with flour and salt into a firm dough.",
+      "Shape into large balls with wet hands.",
+      "Simmer the salted meat in a large pot of water for 20 minutes.",
+      "Add the dumplings and let them simmer on low heat for about 45 minutes. Add the sausages for the last 10 minutes.",
+      "Boil and mash the swede.",
+      "Serve the dumplings with the meat, sausages, swede mash and melted butter."
+    ],
+    "tags": ["norwegian", "everyday", "traditional"],
+    "image": null,
+    "dietary": {"glutenFree": false, "lactoseFree": false, "vegetarian": false},
+    "source": "static"
+  }
+]
