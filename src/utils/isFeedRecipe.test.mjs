@@ -63,12 +63,18 @@ test('hides descriptions containing only test or testing', () => {
   assert.equal(isFeedRecipe({ ...recipe, description: 'Testing a family recipe with fresh tomatoes.' }), true);
 });
 
-test('search excludes the review-reported testing entry but keeps complete recipes mentioning testing', () => {
+test('excludes known test IDs from the feed and search while preserving other complete recipes', () => {
   const complete = { ...recipe, id: 'complete-pasta', title: 'Creamy Garlic Pasta',
     description: 'A quick pasta dish, perfect for testing the recipe form.' };
+  const blocked = { ...complete, id: 'b4a637c2-2a64-4a03-b33f-1d773a084033' };
   const unfinished = { ...recipe, id: 'unfinished-pasta', title: 'Spagetti', description: 'testing' };
-  const visible = [complete, unfinished].filter(isFeedRecipe);
+  assert.equal(isFeedRecipe(blocked), false);
+  assert.equal(isFeedRecipe({ ...blocked, title: 'Renamed recipe', description: 'Fresh pasta.' }), false);
+  const visible = [complete, blocked, unfinished].filter(isFeedRecipe);
   assert.deepEqual(filterRecipes(visible, { search: 'test' }), [complete]);
+  assert.deepEqual(filterRecipes(visible, { search: 'testing' }), [complete]);
+  assert.deepEqual(filterRecipes([blocked].filter(isFeedRecipe), { search: 'testing' }), []);
+  assert.deepEqual(filterRecipes([blocked].filter(isFeedRecipe), { search: 'Creamy Garlic Pasta' }), []);
   assert.deepEqual(filterRecipes(visible, { search: 'Spagetti' }), []);
   assert.deepEqual(filterRecipes(visible), [complete]);
 });

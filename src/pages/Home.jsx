@@ -22,7 +22,7 @@ function Home({ search = '', category = '', diet = '', time = '', onCategoriesLo
       .then((recipes) => {
         if (!controller.signal.aborted) {
           const feedRecipes = recipes.filter(isFeedRecipe);
-          setResult({ status: 'success', recipes: feedRecipes });
+          setResult({ status: 'success', recipes });
           const categories = [...new Set(
             feedRecipes
               .map((recipe) => recipe.category)
@@ -40,7 +40,7 @@ function Home({ search = '', category = '', diet = '', time = '', onCategoriesLo
     return () => controller.abort();
   }, [attempt, onCategoriesLoad]);
 
-  const recipes = filterRecipes(result.recipes, { search, category, diet, time });
+  const recipes = filterRecipes(result.recipes.filter(isFeedRecipe), { search, category, diet, time });
   const hasFilters = search.trim() || category || diet || time;
 
   return (
