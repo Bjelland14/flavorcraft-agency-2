@@ -5,8 +5,17 @@ import Footer from './assets/components/Footer';
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import RecipeDetail from './pages/RecipeDetail';
+import { readFavorites, toggleFavorite, writeFavorites } from './utils/favorites';
 
 function App() {
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      return readFavorites(window.localStorage);
+    } catch {
+      return [];
+    }
+  });
+  const [favoritesError, setFavoritesError] = useState('');
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [category, setCategory] = useState('');
@@ -14,6 +23,17 @@ function App() {
   const [diet, setDiet] = useState('');
   const [time, setTime] = useState('');
   const { pathname } = useLocation();
+
+  function handleToggleFavorite(recipe) {
+    const next = toggleFavorite(favorites, recipe);
+    try {
+      writeFavorites(window.localStorage, next);
+      setFavorites(next);
+      setFavoritesError('');
+    } catch {
+      setFavoritesError('Could not save favorites. Allow browser storage and try again.');
+    }
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedSearch(search), 350);
@@ -27,6 +47,7 @@ function App() {
         category={category} onCategoryChange={setCategory} categories={categories}
         diet={diet} onDietChange={setDiet} time={time} onTimeChange={setTime}
       />
+      {favoritesError && <p className="favorites-error" role="alert">{favoritesError}</p>}
       <Routes>
         <Route
           path="/"
@@ -37,10 +58,12 @@ function App() {
               diet={diet}
               time={time}
               onCategoriesLoad={setCategories}
+              favorites={favorites}
+              onToggleFavorite={handleToggleFavorite}
             />
           }
         />
-        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/favorites" element={<Favorites favorites={favorites} onToggleFavorite={handleToggleFavorite} />} />
         <Route path="/recipe" element={<RecipeDetail />} />
       </Routes>
       <Footer />
