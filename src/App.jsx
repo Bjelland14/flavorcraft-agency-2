@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './assets/components/Header';
 import Footer from './assets/components/Footer';
+import CookieBanner from './assets/components/CookieBanner'; 
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import RecipeDetail from './pages/RecipeDetail';
@@ -67,6 +68,7 @@ function App() {
         <Route path="/recipe" element={<RecipeDetail />} />
       </Routes>
       <Footer />
+      <CookieBanner />
     </div>
   );
 }
