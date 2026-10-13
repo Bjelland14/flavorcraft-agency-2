@@ -26,7 +26,7 @@
 .recipe-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  gap: 10px;
+  gap: 12px;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -56,6 +56,12 @@
 
 .retry-button:hover {
   background: #505050;
+}
+
+@media (min-width: 768px) {
+  .recipe-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 360px) {
