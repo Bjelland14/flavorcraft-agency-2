@@ -1,0 +1,242 @@
+/*helpers from flavorcraft style guide*/
+
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --radius-checkbox: 6px;
+  --radius-image: 12px;
+  --radius-input: 16px;
+  --radius-toast: 16px;
+  --radius-card: 18px;
+  --radius-large: 22px;
+  --radius-pill: 100%;
+}
+
+.type-display,
+.type-h2,
+.type-h3,
+.type-card-title,
+.type-kitchen-step {
+  margin: 0;
+  color: var(--color-forest);
+  font-family: var(--font-display);
+  font-weight: 700;
+}
+
+.type-display {
+  font-size: 32px;
+  line-height: 40px;
+  letter-spacing: -0.5px;
+}
+
+.type-h2 {
+  font-size: 26px;
+  line-height: 32px;
+  letter-spacing: -0.3px;
+}
+
+.type-h3 {
+  font-size: 22px;
+  line-height: 28px;
+}
+
+.type-card-title {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: 17px;
+  line-height: 21px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.type-kitchen-step {
+  font-size: 28px;
+  line-height: 38px;
+}
+
+.type-body-large {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.type-body {
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.type-button {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.type-chip {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
+.type-label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+.type-caption {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.fc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.button,
+.chip,
+.tag,
+.badge,
+.field {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.button {
+  min-height: 48px;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  background: var(--color-terracotta);
+  color: var(--color-white);
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.button:hover {
+  background: var(--color-terracotta-pressed);
+}
+
+.button:disabled {
+  background: var(--color-disabled);
+  color: var(--color-disabled-text);
+}
+
+.button--secondary {
+  border-color: var(--color-forest);
+  background: var(--color-white);
+  color: var(--color-forest);
+}
+
+.button--saffron {
+  background: var(--color-saffron);
+  color: var(--color-ink);
+}
+
+.button--kitchen {
+  min-width: 72px;
+  min-height: 72px;
+  border-radius: 22px;
+}
+
+.chip,
+.tag {
+  min-height: 32px;
+  padding: 8px 12px;
+  background: var(--color-sage);
+  color: var(--color-forest);
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.chip {
+  border: 1px solid var(--color-line);
+  background: var(--color-white);
+  color: var(--color-ink);
+}
+
+.chip--selected {
+  border-color: var(--color-forest);
+  background: var(--color-forest);
+  color: var(--color-white);
+}
+
+.chip--excluded {
+  border-color: var(--color-terracotta);
+  background: var(--color-error-tint);
+  color: var(--color-terracotta-pressed);
+}
+
+.chip:disabled {
+  border-color: transparent;
+  background: var(--color-disabled);
+  color: var(--color-disabled-text);
+}
+
+.tag--now {
+  background: var(--color-saffron);
+  color: var(--color-ink);
+}
+
+.badge {
+  min-width: 20px;
+  min-height: 20px;
+  padding-inline: 6px;
+  background: var(--color-terracotta);
+  color: var(--color-white);
+  font-size: 12px;
+}
+
+.field {
+  min-height: 50px;
+  justify-content: flex-start;
+  padding-inline: 16px;
+  border: 1px solid var(--color-line);
+  background: var(--color-white);
+}
+
+.field:focus-within {
+  outline: 2px solid var(--color-forest);
+  outline-offset: 2px;
+}
+
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  background: var(--color-sage);
+  color: var(--color-forest);
+}
+
+.toast--removed {
+  background: var(--color-highlight-tint);
+}
+
+.skeleton {
+  border-radius: 12px;
+  background: var(--color-disabled);
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+}
