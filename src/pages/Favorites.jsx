@@ -1,6 +1,5 @@
 import RecipeCard from '../assets/components/RecipeCard';
 import '../styles/home.css';
-import RecipeCard from '../assets/components/RecipeCard';
 
 function Favorites({ favorites = [], onToggleFavorite }) {
   return (
