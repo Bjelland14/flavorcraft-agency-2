@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { FilterHorizontalIcon, RefreshIcon } from '@hugeicons/core-free-icons';
 import { getRecipes } from '../api/recipes';
 import { filterRecipes } from '../utils/filterRecipes';
 import { isFeedRecipe } from '../utils/isFeedRecipe';
+import RecipeCard from '../assets/components/RecipeCard';
 import '../styles/home.css';
 
 function formatCategory(category) {
@@ -22,6 +22,8 @@ function Home({
   onCategoryChange,
   onDietChange,
   onTimeChange,
+  favorites = [],
+  onToggleFavorite,
 }) {
   const [result, setResult] = useState({ status: 'loading', recipes: [] });
   const [attempt, setAttempt] = useState(0);
@@ -70,7 +72,7 @@ function Home({
               aria-controls="recipe-filters"
               onClick={() => setFiltersOpen((isOpen) => !isOpen)}
             >
-              <HugeiconsIcon icon={FilterHorizontalIcon} size={20} aria-hidden="true" />
+              <HugeiconsIcon icon={FilterHorizontalIcon} size={18} aria-hidden="true" />
               Filters
             </button>
             <div id="recipe-filters" className="filters" hidden={!filtersOpen}>
@@ -131,29 +133,9 @@ function Home({
             </p>
             <ul className="recipe-grid">
               {recipes.map((recipe) => (
-                <li key={recipe.id} className="recipe-card">
-                  <Link className="recipe-card-link" to={`/recipe/${recipe.id}`}>
-                    <div className="recipe-image">
-                      <span>{recipe.image?.url ? 'Image unavailable' : 'No photo provided'}</span>
-                      {recipe.image?.url && (
-                        <img src={recipe.image.url} alt={recipe.image.alt || recipe.title}
-                          loading="lazy" onError={(event) => { event.currentTarget.hidden = true; }} />
-                      )}
-                    </div>
-                    <div className="recipe-card-content">
-                      {recipe.category && <p className="recipe-category">{recipe.category}</p>}
-                      <h3>{recipe.title}</h3>
-                      {recipe.description && <p className="recipe-description">{recipe.description}</p>}
-                      <ul className="recipe-meta" aria-label="Recipe information">
-                        {Number.isFinite(recipe.prepTime) && Number.isFinite(recipe.cookTime) && (
-                          <li>{recipe.prepTime + recipe.cookTime} min</li>
-                        )}
-                        {recipe.servings > 0 && <li>Serves {recipe.servings}</li>}
-                        {recipe.difficulty && <li>{recipe.difficulty}</li>}
-                      </ul>
-                    </div>
-                  </Link>
-                </li>
+                <RecipeCard key={recipe.id} recipe={recipe}
+                  isFavorite={favorites.some((favorite) => favorite.id === recipe.id)}
+                  onToggleFavorite={onToggleFavorite} />
               ))}
             </ul>
           </>
