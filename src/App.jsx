@@ -24,8 +24,6 @@ function App() {
     <div className="app-shell">
       <Header
         showSearch={pathname === '/'} search={search} onSearchChange={setSearch}
-        category={category} onCategoryChange={setCategory} categories={categories}
-        diet={diet} onDietChange={setDiet} time={time} onTimeChange={setTime}
       />
       <Routes>
         <Route
@@ -37,10 +35,15 @@ function App() {
               diet={diet}
               time={time}
               onCategoriesLoad={setCategories}
+              categories={categories}
+              onCategoryChange={setCategory}
+              onDietChange={setDiet}
+              onTimeChange={setTime}
             />
           }
         />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/recipe/:id" element={<RecipeDetail />} />
         <Route path="/recipe" element={<RecipeDetail />} />
       </Routes>
       <Footer />

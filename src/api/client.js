@@ -6,7 +6,9 @@ export async function getJSON(path, { params = {}, signal } = {}) {
   const response = await fetch(url, { signal });
 
   if (!response.ok) {
-    throw new Error(`Request failed (${response.status}). Please try again.`);
+    const error = new Error(`Request failed (${response.status}). Please try again.`);
+    error.status = response.status;
+    throw error;
   }
 
   return response.json();

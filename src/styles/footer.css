@@ -39,6 +39,10 @@
   font-weight: 600;
 }
 
+.nav-button[aria-current='page'] svg {
+  fill: currentColor;
+}
+
 .nav-button:hover {
   background: var(--color-sage);
 }
