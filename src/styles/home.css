@@ -9,6 +9,87 @@
   overflow-wrap: anywhere;
 }
 
+.recipe-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.recipe-toolbar h2 {
+  min-width: 0;
+}
+
+.recipe-filter-control {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.filter-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 112px;
+  height: 44px;
+  padding: 10px 20px;
+  border: 2px solid var(--color-ink);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--color-ink);
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 20px;
+}
+
+.filter-button svg {
+  flex: 0 0 auto;
+}
+
+.filter-button:hover {
+  background: var(--color-sage);
+}
+
+.filters:not([hidden]) {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% + 12px);
+  right: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(132px, 1fr));
+  width: min(100vw - (var(--page-gutter) * 2), 520px);
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--color-line);
+  border-radius: 12px;
+  background: var(--color-white);
+  box-shadow: 0 14px 32px rgb(31 42 34 / 12%);
+}
+
+.filters label {
+  display: grid;
+  gap: 6px;
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.2px;
+  line-height: 16px;
+  text-transform: uppercase;
+}
+
+.filters select {
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 10px;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-size: 14px;
+  text-transform: none;
+}
+
 .empty-state {
   margin: 24px 0;
   padding-block: 32px;
@@ -117,6 +198,10 @@
 
 @media (max-width: 520px) {
   .recipe-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .filters:not([hidden]) {
     grid-template-columns: 1fr;
   }
 }

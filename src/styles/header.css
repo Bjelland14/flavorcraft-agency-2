@@ -106,71 +106,12 @@
 }
 
 .search-field:focus-within {
-  outline: 2px solid var(--color-forest);
-  outline-offset: 2px;
+  border: 2px solid var(--color-forest);
+  outline: none;
 }
 
 .search-field input:focus-visible {
   outline: none;
-}
-
-.filter-button {
-  display: inline-flex;
-  align-items: center;
-  justify-self: start;
-  gap: 6px;
-  min-height: 44px;
-  padding: 8px 16px;
-  border: 1px solid var(--color-forest);
-  border-radius: 999px;
-  background: var(--color-forest);
-  color: var(--color-white);
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 20px;
-}
-
-.filter-button:hover {
-  background: var(--color-forest-2);
-}
-
-.filters:not([hidden]) {
-  position: absolute;
-  top: calc(100% + 12px);
-  right: 0;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(132px, 1fr));
-  width: min(100vw - (var(--page-gutter) * 2), 520px);
-  gap: 12px;
-  padding: 16px;
-  border: 1px solid var(--color-line);
-  border-radius: 12px;
-  background: var(--color-white);
-  box-shadow: 0 14px 32px rgb(31 42 34 / 12%);
-}
-
-.filters label {
-  display: grid;
-  gap: 6px;
-  color: var(--color-muted);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 1.2px;
-  line-height: 16px;
-  text-transform: uppercase;
-}
-
-.filters select {
-  width: 100%;
-  min-width: 0;
-  min-height: 44px;
-  padding: 8px 10px;
-  border: 1px solid var(--color-line);
-  border-radius: 8px;
-  background: var(--color-white);
-  color: var(--color-ink);
-  font-size: 14px;
-  text-transform: none;
 }
 
 .top-nav {
@@ -182,21 +123,6 @@
     font-size: 21px;
   }
 
-  .filter-button {
-    width: 44px;
-    padding-inline: 0;
-    justify-content: center;
-    font-size: 0;
-  }
-
-  .filter-button svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .filters:not([hidden]) {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (min-width: 720px) {
@@ -240,17 +166,6 @@
     text-decoration: none;
   }
 
-  .top-nav-link::after {
-    position: absolute;
-    right: 12px;
-    bottom: 0;
-    left: 12px;
-    height: 3px;
-    background: transparent;
-    border-radius: 3px 3px 0 0;
-    content: '';
-  }
-
   .top-nav-link:hover,
   .top-nav-link[aria-current='page'] {
     color: var(--color-forest);
@@ -260,8 +175,8 @@
     font-weight: 600;
   }
 
-  .top-nav-link[aria-current='page']::after {
-    background: var(--color-forest);
+  .top-nav-link[aria-current='page'] svg {
+    fill: currentColor;
   }
 
   .search-field input {
@@ -269,8 +184,5 @@
     line-height: 24px;
   }
 
-  .filters label {
-    font-size: 12px;
-  }
 }
 
