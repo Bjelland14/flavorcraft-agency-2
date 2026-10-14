@@ -4,9 +4,9 @@ Each entry includes the date, role, task, what AI was used for, and what was don
 
 ## 6 October 2026
 
-**Name:** Lloyd Edward Bjelland
+**Name:** Lloyd Bjelland
 
-**Role:** SEO & Analytics Lead
+**Role:** Scrum Master /SEO & Analytics Lead
 
 **Task:** Review API data for SEO
 
@@ -25,3 +25,15 @@ Each entry includes the date, role, task, what AI was used for, and what was don
 **What I used AI for:** Getting feedback on the structure and coverage of the QA test plan.
 
 **What I did myself / how I checked it:** I reviewed the suggested test cases against the project's actual sprint 1 requirements and decided which tests were relevant to the application. 
+
+## 12 October 2026
+
+**Name:** Lloyd Bjelland
+
+**Role:** Scrum Master / SEO & Analytics Lead
+
+**Task:** Static recipe list (#63)
+
+**What I used Ai to generate the static recipe list in JSON format, as suggested by the PO.
+
+**What I did myself / how I checked it:**  chose the 23 Norwegian dinners, checked the recipes and diet info.
