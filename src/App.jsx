@@ -2,11 +2,21 @@ import { useEffect, useState } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import Header from './assets/components/Header';
 import Footer from './assets/components/Footer';
+import CookieBanner from './assets/components/CookieBanner'; 
 import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import RecipeDetail from './pages/RecipeDetail';
+import { readFavorites, toggleFavorite, writeFavorites } from './utils/favorites';
 
 function App() {
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      return readFavorites(window.localStorage);
+    } catch {
+      return [];
+    }
+  });
+  const [favoritesError, setFavoritesError] = useState('');
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
   const [category, setCategory] = useState('');
@@ -14,6 +24,17 @@ function App() {
   const [diet, setDiet] = useState('');
   const [time, setTime] = useState('');
   const { pathname } = useLocation();
+
+  function handleToggleFavorite(recipe) {
+    const next = toggleFavorite(favorites, recipe);
+    try {
+      writeFavorites(window.localStorage, next);
+      setFavorites(next);
+      setFavoritesError('');
+    } catch {
+      setFavoritesError('Could not save favorites. Allow browser storage and try again.');
+    }
+  }
 
   useEffect(() => {
     const timer = setTimeout(() => setDebouncedSearch(search), 350);
@@ -25,6 +46,7 @@ function App() {
       <Header
         showSearch={pathname === '/'} search={search} onSearchChange={setSearch}
       />
+      {favoritesError && <p className="favorites-error" role="alert">{favoritesError}</p>}
       <Routes>
         <Route
           path="/"
@@ -39,13 +61,16 @@ function App() {
               onCategoryChange={setCategory}
               onDietChange={setDiet}
               onTimeChange={setTime}
+              favorites={favorites}
+              onToggleFavorite={handleToggleFavorite}
             />
           }
         />
-        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/favorites" element={<Favorites favorites={favorites} onToggleFavorite={handleToggleFavorite} />} />
         <Route path="/recipe" element={<RecipeDetail />} />
       </Routes>
       <Footer />
+      <CookieBanner />
     </div>
   );
 }

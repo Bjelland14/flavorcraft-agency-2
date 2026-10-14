@@ -137,6 +137,34 @@
   object-fit: cover;
 }
 
+.favorite-button {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  background: #fff;
+  color: #333;
+}
+
+.favorite-button:hover {
+  background: #f0f0f0;
+}
+
+.favorite-button[aria-pressed='true'] {
+  color: #b42346;
+}
+
+.favorites-error {
+  margin: 16px 20px 0;
+  color: #a51d35;
+}
+
 .recipe-card-content {
   padding: 16px;
   overflow-wrap: anywhere;
