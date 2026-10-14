@@ -159,7 +159,7 @@
 }
 
 .favorite-button:hover {
-  background: var(--color-terracotta-soft);
+  background: var(--color-error-tint);
   color: var(--color-terracotta);
   transform: translateY(-1px);
 }
