@@ -31,3 +31,18 @@ export async function getRecipes({ signal } = {}) {
   return recipes;
 }
 
+export async function getRecipe(id, { signal } = {}) {
+  if (typeof id !== 'string' || !id.trim()) {
+    throw new Error('A recipe id is required.');
+  }
+
+  const result = await getJSON(`${RECIPES_PATH}/${encodeURIComponent(id)}`, { signal });
+  const recipe = result?.data;
+
+  if (!recipe || typeof recipe.id !== 'string' || typeof recipe.title !== 'string') {
+    throw new Error('The recipe response was invalid. Please try again.');
+  }
+
+  return recipe;
+}
+

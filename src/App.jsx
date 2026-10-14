@@ -67,6 +67,7 @@ function App() {
           }
         />
         <Route path="/favorites" element={<Favorites favorites={favorites} onToggleFavorite={handleToggleFavorite} />} />
+        <Route path="/recipe/:id" element={<RecipeDetail />} />
         <Route path="/recipe" element={<RecipeDetail />} />
       </Routes>
       <Footer />
