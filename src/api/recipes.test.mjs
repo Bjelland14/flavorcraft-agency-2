@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { getRecipes } from './recipes.js';
+import { getRecipe, getRecipes } from './recipes.js';
 import { filterRecipes } from '../utils/filterRecipes.js';
 
 const recipes = [
@@ -30,6 +30,29 @@ test('fetches every page and passes the cancellation signal', async (t) => {
 test('handles an empty collection', async (t) => {
   t.mock.method(globalThis, 'fetch', async () => Response.json({ data: [], meta: { nextPage: null } }));
   assert.deepEqual(await getRecipes(), []);
+});
+
+test('fetches one recipe by its id', async (t) => {
+  const controller = new AbortController();
+  t.mock.method(globalThis, 'fetch', async (url, options) => {
+    assert.equal(url.pathname, '/recipe-book/recipes/recipe-1');
+    assert.equal(options.signal, controller.signal);
+    return Response.json({ data: { id: 'recipe-1', title: 'One recipe' } });
+  });
+
+  assert.deepEqual(await getRecipe('recipe-1', { signal: controller.signal }), {
+    id: 'recipe-1', title: 'One recipe',
+  });
+});
+
+test('rejects a malformed single recipe response', async (t) => {
+  t.mock.method(globalThis, 'fetch', async () => Response.json({ data: { id: 'recipe-1' } }));
+  await assert.rejects(getRecipe('recipe-1'), /invalid/);
+});
+
+test('keeps a 404 status so the detail page can show not found', async (t) => {
+  t.mock.method(globalThis, 'fetch', async () => new Response('', { status: 404 }));
+  await assert.rejects(getRecipe('missing-recipe'), (error) => error.status === 404);
 });
 
 test('rejects unsuccessful responses and network failures', async (t) => {

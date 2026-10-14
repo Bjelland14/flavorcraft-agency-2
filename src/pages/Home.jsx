@@ -22,8 +22,9 @@ function Home({
   onCategoryChange,
   onDietChange,
   onTimeChange,
+  favorites = [],
+  onToggleFavorite,
 }) {
-function Home({ search = '', category = '', diet = '', time = '', onCategoriesLoad, favorites, onToggleFavorite }) {
   const [result, setResult] = useState({ status: 'loading', recipes: [] });
   const [attempt, setAttempt] = useState(0);
   const [filtersOpen, setFiltersOpen] = useState(false);
