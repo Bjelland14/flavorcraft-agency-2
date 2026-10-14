@@ -153,6 +153,14 @@
   font-weight: 500;
 }
 
+.ingredients-serving {
+  margin: 4px 0 0;
+  color: var(--color-muted);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+}
+
 .ingredient-list {
   display: grid;
   gap: 2px;

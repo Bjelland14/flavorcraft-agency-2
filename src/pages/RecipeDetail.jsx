@@ -12,14 +12,31 @@ function recipeFacts(recipe) {
   ].filter(Boolean);
 }
 
-function ingredientText(ingredient) {
+function formatQuantity(quantity) {
+  return new Intl.NumberFormat('en', { maximumFractionDigits: 2 }).format(quantity);
+}
+
+function ingredientText(ingredient, servings) {
   if (typeof ingredient === 'string') return ingredient;
   if (!ingredient || typeof ingredient.name !== 'string') return '';
 
-  const amount = [ingredient.amount, ingredient.unit]
-    .filter((value) => value !== undefined && value !== null && String(value).trim())
-    .join(' ');
-  return amount ? `${amount} ${ingredient.name}` : ingredient.name;
+  const rawQuantity = ingredient.quantity ?? ingredient.amount;
+  const numericQuantity = typeof rawQuantity === 'number'
+    ? rawQuantity
+    : Number(String(rawQuantity).trim());
+  const quantity = Number.isFinite(numericQuantity) && numericQuantity > 0
+    ? numericQuantity / servings
+    : rawQuantity;
+  const unit = typeof ingredient.unit === 'string' ? ingredient.unit.trim() : '';
+  const displayUnit = unit === 'piece' && quantity !== 1 ? 'pieces' : unit;
+  const measurement = [
+    quantity !== undefined && quantity !== null && String(quantity).trim()
+      ? Number.isFinite(quantity) ? formatQuantity(quantity) : String(quantity).trim()
+      : '',
+    displayUnit,
+  ].filter(Boolean).join(' ');
+
+  return measurement ? `${measurement} ${ingredient.name}` : ingredient.name;
 }
 
 function RecipeDetail() {
@@ -94,8 +111,9 @@ function RecipeDetail() {
   }
 
   const { recipe } = result;
+  const servingCount = Number.isFinite(recipe.servings) && recipe.servings > 0 ? recipe.servings : 1;
   const ingredients = Array.isArray(recipe.ingredients)
-    ? recipe.ingredients.map(ingredientText).filter(Boolean)
+    ? recipe.ingredients.map((ingredient) => ingredientText(ingredient, servingCount)).filter(Boolean)
     : [];
   const instructions = Array.isArray(recipe.instructions)
     ? recipe.instructions.filter((instruction) => typeof instruction === 'string' && instruction.trim())
@@ -146,6 +164,7 @@ function RecipeDetail() {
         <div className="recipe-workspace">
           <section className="ingredients-panel" aria-labelledby="ingredients-heading">
             <h2 id="ingredients-heading">Ingredients <span>({ingredients.length})</span></h2>
+            <p className="ingredients-serving">For 1 serving</p>
             {ingredients.length > 0 ? (
               <ul className="ingredient-list">
                 {ingredients.map((ingredient, index) => {
