@@ -45,8 +45,6 @@ function App() {
     <div className="app-shell">
       <Header
         showSearch={pathname === '/'} search={search} onSearchChange={setSearch}
-        category={category} onCategoryChange={setCategory} categories={categories}
-        diet={diet} onDietChange={setDiet} time={time} onTimeChange={setTime}
       />
       {favoritesError && <p className="favorites-error" role="alert">{favoritesError}</p>}
       <Routes>
@@ -59,6 +57,10 @@ function App() {
               diet={diet}
               time={time}
               onCategoriesLoad={setCategories}
+              categories={categories}
+              onCategoryChange={setCategory}
+              onDietChange={setDiet}
+              onTimeChange={setTime}
               favorites={favorites}
               onToggleFavorite={handleToggleFavorite}
             />
