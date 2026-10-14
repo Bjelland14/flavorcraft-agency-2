@@ -1,27 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600&family=Literata:opsz,wght@7..72,700&display=swap');
+@import './design-system.css';
+
 :root {
   --color-forest: #1f3d2b;
   --color-forest-2: #2e5640;
   --color-sage: #dde6d3;
   --color-terracotta: #c0482a;
-  --color-terracotta-soft: #fbede8;
+  --color-terracotta-pressed: #a63b21;
+  --color-saffron: #f2c14e;
   --color-cream: #f7f3ea;
   --color-white: #ffffff;
   --color-line: #e6dfd0;
+  --color-disabled: #e9e4da;
   --color-ink: #1f2a22;
-  --color-muted: #667064;
-  --content-max: 1180px;
+  --color-muted: #6b6f66;
+  --color-disabled-text: #a9a397;
+  --color-error-tint: #fbede8;
+  --color-highlight-tint: #fbf1d3;
+  --font-display: 'Literata', Georgia, serif;
+  --font-ui: 'Lexend', 'Segoe UI', sans-serif;
   --page-gutter: 20px;
-  font-family: system-ui, 'Segoe UI', sans-serif;
+  --content-max: 1280px;
+  --header-height: 76px;
+  font-family: var(--font-ui);
   font-size: 16px;
   line-height: 1.5;
   letter-spacing: 0;
   color: var(--color-ink);
   background: var(--color-cream);
-  color-scheme: light;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
@@ -35,6 +41,29 @@ body {
   background: var(--color-cream);
 }
 
+#root {
+  min-height: 100svh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  color: var(--color-forest);
+}
+
+a {
+  color: inherit;
+}
+
 button,
 input,
 select {
@@ -45,16 +74,14 @@ button {
   cursor: pointer;
 }
 
+button:disabled {
+  cursor: not-allowed;
+}
+
 :focus-visible {
   outline: 2px solid var(--color-forest);
   outline-offset: 3px;
 }
-
-::selection {
-  color: var(--color-white);
-  background: var(--color-forest);
-}
-
 
 .app-shell {
   width: min(100%, 1440px);
@@ -66,8 +93,8 @@ button {
 .content {
   width: 100%;
   max-width: var(--content-max);
-  padding: 20px var(--page-gutter) calc(108px + env(safe-area-inset-bottom));
   margin-inline: auto;
+  padding: 24px var(--page-gutter) calc(108px + env(safe-area-inset-bottom));
 }
 
 .sr-only {
@@ -85,9 +112,20 @@ button {
 @media (min-width: 720px) {
   :root {
     --page-gutter: 32px;
+    --header-height: 72px;
   }
 
   .content {
-    padding-block: 32px 72px;
+    padding-block: 32px 64px;
+  }
+}
+
+@media (min-width: 1200px) {
+  :root {
+    --page-gutter: 80px;
+  }
+
+  .content {
+    padding-block: 48px 80px;
   }
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { RefreshIcon } from '@hugeicons/core-free-icons';
+import { FilterHorizontalIcon, RefreshIcon } from '@hugeicons/core-free-icons';
 import { getRecipes } from '../api/recipes';
 import { filterRecipes } from '../utils/filterRecipes';
 import { isFeedRecipe } from '../utils/isFeedRecipe';
@@ -12,9 +12,21 @@ function formatCategory(category) {
   return value ? `${value[0].toUpperCase()}${value.slice(1)}` : '';
 }
 
+function Home({
+  search = '',
+  category = '',
+  diet = '',
+  time = '',
+  onCategoriesLoad,
+  categories = [],
+  onCategoryChange,
+  onDietChange,
+  onTimeChange,
+}) {
 function Home({ search = '', category = '', diet = '', time = '', onCategoriesLoad, favorites, onToggleFavorite }) {
   const [result, setResult] = useState({ status: 'loading', recipes: [] });
   const [attempt, setAttempt] = useState(0);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -47,9 +59,52 @@ function Home({ search = '', category = '', diet = '', time = '', onCategoriesLo
   return (
     <main className="content">
       <section className="recipe-area" aria-labelledby="view-heading">
-        <h2 id="view-heading">
-          {search.trim() ? 'Search results' : category ? `${category} recipes` : 'Tonight for your family'}
-        </h2>
+        <div className="recipe-toolbar">
+          <h2 id="view-heading">
+            {search.trim() ? 'Search results' : category ? `${category} recipes` : 'Tonight for your family'}
+          </h2>
+          <div className="recipe-filter-control">
+            <button
+              type="button"
+              className="filter-button"
+              aria-expanded={filtersOpen}
+              aria-controls="recipe-filters"
+              onClick={() => setFiltersOpen((isOpen) => !isOpen)}
+            >
+              <HugeiconsIcon icon={FilterHorizontalIcon} size={18} aria-hidden="true" />
+              Filters
+            </button>
+            <div id="recipe-filters" className="filters" hidden={!filtersOpen}>
+              <label>
+                Category
+                <select value={category} onChange={(event) => onCategoryChange(event.target.value)}>
+                  <option value="">All categories</option>
+                  {categories.map((recipeCategory) => (
+                    <option key={recipeCategory} value={recipeCategory}>{recipeCategory}</option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Diet
+                <select value={diet} onChange={(event) => onDietChange(event.target.value)}>
+                  <option value="">Any diet</option>
+                  <option value="gluten-free">Gluten-free</option>
+                  <option value="vegan">Vegan</option>
+                  <option value="vegetarian">Vegetarian</option>
+                </select>
+              </label>
+              <label>
+                Cooking time
+                <select value={time} onChange={(event) => onTimeChange(event.target.value)}>
+                  <option value="">Any time</option>
+                  <option value="15">Up to 15 minutes</option>
+                  <option value="30">Up to 30 minutes</option>
+                  <option value="60">Up to 60 minutes</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
         {result.status === 'loading' && (
           <p className="empty-state" role="status">Loading recipes...</p>
         )}
