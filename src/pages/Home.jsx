@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { FilterHorizontalIcon, RefreshIcon } from '@hugeicons/core-free-icons';
 import { getRecipes } from '../api/recipes';
 import { filterRecipes } from '../utils/filterRecipes';
 import { isFeedRecipe } from '../utils/isFeedRecipe';
+import { pickSurpriseRecipe } from '../utils/surpriseRecipe';
+import FeaturedRecipe from '../assets/components/FeaturedRecipe';
 import RecipeCard from '../assets/components/RecipeCard';
 import '../styles/home.css';
 
@@ -24,10 +27,13 @@ function Home({
   onTimeChange,
   favorites = [],
   onToggleFavorite,
+  lastSurpriseRecipeId = null,
+  onSurpriseRecipeSelected,
 }) {
   const [result, setResult] = useState({ status: 'loading', recipes: [] });
   const [attempt, setAttempt] = useState(0);
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const controller = new AbortController();
@@ -56,13 +62,29 @@ function Home({
 
   const recipes = filterRecipes(result.recipes.filter(isFeedRecipe), { search, category, diet, time });
   const hasFilters = search.trim() || category || diet || time;
+  const featuredRecipe = recipes.find((recipe) =>
+    recipe.category?.trim().toLowerCase() === 'dinner' &&
+    recipe.difficulty?.trim().toLowerCase() === 'easy' &&
+    recipe.prepTime + recipe.cookTime <= 60
+  ) || recipes.find((recipe) => recipe.category?.trim().toLowerCase() === 'dinner') || recipes[0];
+
+  function handleSurprise() {
+    const recipe = pickSurpriseRecipe(result.recipes, { search, category, diet, time }, lastSurpriseRecipeId);
+    if (recipe) {
+      onSurpriseRecipeSelected(recipe.id);
+      navigate(`/recipe/${encodeURIComponent(recipe.id)}`);
+    }
+  }
 
   return (
     <main className="content">
+      <FeaturedRecipe recipe={featuredRecipe} status={result.status}
+        isFavorite={featuredRecipe ? favorites.some((favorite) => favorite.id === featuredRecipe.id) : false}
+        onToggleFavorite={onToggleFavorite} onSurprise={handleSurprise} />
       <section className="recipe-area" aria-labelledby="view-heading">
         <div className="recipe-toolbar">
           <h2 id="view-heading">
-            {search.trim() ? 'Search results' : category ? `${category} recipes` : 'Tonight for your family'}
+            {search.trim() ? 'Search results' : category ? `${category} recipes` : 'All recipes'}
           </h2>
           <div className="recipe-filter-control">
             <button

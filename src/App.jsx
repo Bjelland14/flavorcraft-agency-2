@@ -23,6 +23,7 @@ function App() {
   const [categories, setCategories] = useState([]);
   const [diet, setDiet] = useState('');
   const [time, setTime] = useState('');
+  const [lastSurpriseRecipeId, setLastSurpriseRecipeId] = useState(null);
   const { pathname } = useLocation();
 
   function handleToggleFavorite(recipe) {
@@ -63,6 +64,8 @@ function App() {
               onTimeChange={setTime}
               favorites={favorites}
               onToggleFavorite={handleToggleFavorite}
+              lastSurpriseRecipeId={lastSurpriseRecipeId}
+              onSurpriseRecipeSelected={setLastSurpriseRecipeId}
             />
           }
         />
