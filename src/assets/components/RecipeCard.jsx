@@ -1,35 +1,77 @@
+import { useId, useState } from 'react';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { FavouriteIcon } from '@hugeicons/core-free-icons';
+import { FavouriteIcon, Image02Icon } from '@hugeicons/core-free-icons';
+import '../../styles/recipe-card.css';
 
-function RecipeCard({ recipe, isFavorite, onToggleFavorite }) {
+const DIET_LABELS = {
+  vegetarian: 'Veg',
+  vegan: 'Vegan',
+  'gluten-free': 'Gluten-free',
+};
+
+function RecipePhoto({ url, alt }) {
+  const [failed, setFailed] = useState(false);
+  const showImage = url && !failed;
+
+  return (
+    <div className="recipe-card-photo">
+      {showImage ? (
+        <img src={url} alt={alt} loading="lazy" onError={() => setFailed(true)} />
+      ) : (
+        <div className="recipe-card-photo-fallback" role="img"
+          aria-label={url ? 'Recipe photo unavailable' : 'No recipe photo provided'}>
+          <HugeiconsIcon icon={Image02Icon} size={24} aria-hidden="true" />
+          <span>{url ? 'Unavailable' : 'No photo'}</span>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function RecipeCard({ recipe, isFavorite = false, onToggleFavorite }) {
+  const titleId = useId();
+  const tags = Array.isArray(recipe.tags) ? recipe.tags : [];
+  const diets = [...new Set(tags.filter((tag) => typeof tag === 'string')
+    .map((tag) => tag.trim().toLowerCase().replace(/\s+/g, '-'))
+    .filter((tag) => DIET_LABELS[tag]))];
+  const ingredients = Array.isArray(recipe.ingredients)
+    ? recipe.ingredients.map((ingredient) => ingredient?.name)
+      .filter((name) => typeof name === 'string' && name.trim()).slice(0, 3)
+    : [];
+  const hasTime = Number.isFinite(recipe.prepTime) && Number.isFinite(recipe.cookTime);
   const favoriteLabel = `${isFavorite ? 'Remove' : 'Save'} ${recipe.title} ${isFavorite ? 'from' : 'to'} favorites`;
 
   return (
-    <li className="recipe-card">
-      <div className="recipe-image">
-        <span>{recipe.image?.url ? 'Image unavailable' : 'No photo provided'}</span>
-        {recipe.image?.url && (
-          <img src={recipe.image.url} alt={recipe.image.alt || recipe.title}
-            loading="lazy" onError={(event) => { event.currentTarget.hidden = true; }} />
-        )}
-        <button type="button" className="favorite-button" aria-label={favoriteLabel}
-          title={favoriteLabel} aria-pressed={isFavorite} onClick={() => onToggleFavorite(recipe)}>
-          <HugeiconsIcon icon={FavouriteIcon} size={22} aria-hidden="true"
-            fill={isFavorite ? 'currentColor' : 'none'} />
-        </button>
-      </div>
+    <li className="recipe-card" aria-labelledby={titleId}>
+      <RecipePhoto key={recipe.image?.url || 'no-photo'}
+        url={recipe.image?.url} alt={recipe.image?.alt || recipe.title} />
       <div className="recipe-card-content">
         {recipe.category && <p className="recipe-category">{recipe.category}</p>}
-        <h3>{recipe.title}</h3>
-        {recipe.description && <p className="recipe-description">{recipe.description}</p>}
-        <ul className="recipe-meta" aria-label="Recipe information">
-          {Number.isFinite(recipe.prepTime) && Number.isFinite(recipe.cookTime) && (
-            <li>{recipe.prepTime + recipe.cookTime} min</li>
-          )}
-          {recipe.servings > 0 && <li>Serves {recipe.servings}</li>}
+        <h3 id={titleId} title={recipe.title}>{recipe.title}</h3>
+        <ul className="recipe-card-badges" aria-label="Recipe information">
+          {hasTime && <li>{recipe.prepTime + recipe.cookTime} min</li>}
           {recipe.difficulty && <li>{recipe.difficulty}</li>}
+          {recipe.servings > 0 && <li title={`${recipe.servings} servings`}>{recipe.servings} serv</li>}
+          {diets.map((diet) => <li key={diet} title={diet === 'vegetarian' ? 'Vegetarian' : DIET_LABELS[diet]}
+            aria-label={diet === 'vegetarian' ? 'Vegetarian' : DIET_LABELS[diet]}>{DIET_LABELS[diet]}</li>)}
         </ul>
+        {ingredients.length > 0 && (
+          <p className="recipe-card-ingredients" title={ingredients.join(', ')}>
+            {ingredients.map((ingredient, index) => (
+              <span key={`${ingredient}-${index}`}>
+                {index > 0 && <span className="recipe-card-separator" aria-hidden="true"> &middot; </span>}
+                {index > 0 && <span className="sr-only">, </span>}{ingredient}
+              </span>
+            ))}
+          </p>
+        )}
       </div>
+      <button type="button" className="recipe-card-favorite" aria-label={favoriteLabel}
+        title={favoriteLabel} aria-pressed={isFavorite} disabled={!onToggleFavorite}
+        onClick={() => onToggleFavorite(recipe)}>
+        <HugeiconsIcon icon={FavouriteIcon} size={22} aria-hidden="true"
+          fill={isFavorite ? 'currentColor' : 'none'} />
+      </button>
     </li>
   );
 }
