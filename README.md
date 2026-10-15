@@ -27,9 +27,11 @@ npm run build
 
 The project uses the following structure:
 
-- `src/assets/components/` – Reusable React components (Header and Footer)
+- `src/assets/components/` – Reusable React components (Header, Footer, CookieBanner)
 - `src/pages/` – Application pages
-- `src/services/` – API requests
+- `src/api/` – API requests
+- `src/data/` – Static recipe list (recipes.json)
+- `src/utils/` – Helper functions (filters, Recipe schema)
 - `src/styles/` – Global and component styles
 
 ## Routing
@@ -59,3 +61,26 @@ React Router is used for client-side routing.
 
 UX research (interviews, notes and insights) and designs are in Figma:
 [FlavorCraft Labs – Team Beta (Figma)](https://www.figma.com/design/Gvl9cCzIGiyHXIkvVdwEmB/FlavorCraft-Labs---Team-Beta?node-id=0-1&t=Uo6HZWvx0IGVYbYc-1)
+
+## SEO & Analytics
+
+**Responsible:** Lloyd Bjelland (SEO & Analytics Lead)
+
+### SEO
+- **Meta tags:** page title, meta description, Open Graph and Twitter card tags in `index.html` (#71)
+- **robots.txt:** allows all search engines. Before, the SPA redirect returned `index.html` for `/robots.txt` (#77, in review)
+- **Recipe schema (JSON-LD):** helper in `src/utils/recipeSchema.js` that turns a recipe into Schema.org/Recipe data for Google. It will be added to the recipe detail page (#42, in review)
+  - No `aggregateRating`, since the API has no rating data (agreed with the PO)
+  - Never includes `owner.email`, for privacy
+- **Planned:** dynamic page titles and recipe-specific Open Graph tags on the recipe detail page (#40, #41)
+
+### Analytics
+- **Microsoft Clarity** for heatmaps and session recordings (#39)
+- Clarity only loads after the user accepts the cookie banner, as required in Norway/EU (`src/assets/components/CookieBanner.jsx`)
+
+### Lighthouse
+| Date | Performance | Accessibility | Best Practices | SEO |
+|------|-------------|---------------|----------------|-----|
+| 14.10 (first audit, mobile) | 81 | 100 | 100 | 92 |
+
+Findings and follow-up are tracked in #43.
