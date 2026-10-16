@@ -12,6 +12,18 @@
   font-family: var(--font-ui);
 }
 
+.recipe-card-link {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.recipe-card-link:focus-visible {
+  outline: 3px solid var(--color-saffron);
+  outline-offset: 2px;
+}
+
 .recipe-card-photo {
   width: 100%;
   aspect-ratio: 1;
@@ -106,6 +118,7 @@
 
 .recipe-card-favorite {
   position: absolute;
+  z-index: 2;
   top: 4px;
   right: 4px;
   display: grid;

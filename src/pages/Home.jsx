@@ -6,6 +6,7 @@ import { getRecipes } from '../api/recipes';
 import { filterRecipes } from '../utils/filterRecipes';
 import { isFeedRecipe } from '../utils/isFeedRecipe';
 import { pickSurpriseRecipe } from '../utils/surpriseRecipe';
+import { combineRecipes } from '../utils/recipeCollection';
 import FeaturedRecipe from '../assets/components/FeaturedRecipe';
 import RecipeCard from '../assets/components/RecipeCard';
 import '../styles/home.css';
@@ -39,8 +40,9 @@ function Home({
     const controller = new AbortController();
 
     getRecipes({ signal: controller.signal })
-      .then((recipes) => {
+      .then((apiRecipes) => {
         if (!controller.signal.aborted) {
+          const recipes = combineRecipes(apiRecipes);
           const feedRecipes = recipes.filter(isFeedRecipe);
           setResult({ status: 'success', recipes });
           const categories = [...new Set(

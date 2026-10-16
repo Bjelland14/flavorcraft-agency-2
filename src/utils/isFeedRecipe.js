@@ -18,7 +18,10 @@ function hasRealContent(value) {
 }
 
 export function isFeedRecipe(recipe) {
-  if (!recipe || TEST_RECIPE_IDS.has(recipe.id)) return false;
+  if (!recipe) return false;
+  if (recipe.source === 'static') return true;
+
+  if (TEST_RECIPE_IDS.has(recipe.id)) return false;
 
   if (typeof recipe.image?.url !== 'string' || !recipe.image.url.trim()) {
     return false;
