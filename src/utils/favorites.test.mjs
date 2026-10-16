@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { FAVORITES_KEY, readFavorites, toggleFavorite, writeFavorites } from './favorites.js';
 
 const recipe = {
-  id: 'salad', title: 'Tomato salad', description: 'Fresh tomatoes.',
+  id: 'db0b5880-e53a-4850-ba5f-3c3236c6f252', title: 'Tomato salad', description: 'Fresh tomatoes.',
   image: { url: 'https://example.com/salad.jpg' }, prepTime: 10, cookTime: 0,
   ingredients: [{ name: 'Tomatoes' }], instructions: ['Chop and serve.'],
 };

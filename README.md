@@ -34,6 +34,19 @@ The project uses the following structure:
 - `src/utils/` – Helper functions (filters, Recipe schema)
 - `src/styles/` – Global and component styles
 
+## Shared API recipe review (#83)
+
+The feed, search, category options, Surprise me, and restored favorites use
+`isFeedRecipe`. Only API IDs listed in `src/data/approvedRecipeIds.js` can pass
+this check, alongside the existing content and photo checks. New shared-API
+entries are hidden by default, even if they copy a reviewed recipe's title.
+
+To include another API recipe, review its description, ingredients, instructions,
+and photo, then add its exact ID and a title comment to that file. Remove its ID
+if it becomes test content. Simple recipes can still qualify with fewer than
+three ingredients. The static JSON recipe collection is currently unused by the
+feed; a `source: 'static'` field from the shared API does not bypass review.
+
 ## Routing
 
 React Router is used for client-side routing.
