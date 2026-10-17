@@ -3,14 +3,14 @@ import { test } from 'node:test';
 import { pickSurpriseRecipe } from './surpriseRecipe.js';
 
 const dinner = {
-  id: 'dinner', title: 'Tomato pasta', description: 'A quick tomato pasta for dinner.',
+  id: 'bfeeef7c-b89a-4e9e-871c-928912a09d61', title: 'Tomato pasta', description: 'A quick tomato pasta for dinner.',
   image: { url: 'https://example.com/pasta.jpg' }, category: 'Dinner',
   prepTime: 5, cookTime: 15, servings: 2, tags: ['Vegetarian'],
   ingredients: [{ name: 'Tomatoes' }, { name: 'Pasta' }],
   instructions: ['Boil the pasta.', 'Add the tomatoes and serve.'],
 };
-const breakfast = { ...dinner, id: 'breakfast', title: 'Toast', category: 'Breakfast', tags: [] };
-const slowDinner = { ...dinner, id: 'slow', cookTime: 90 };
+const breakfast = { ...dinner, id: '79783d40-2339-47ad-840a-9e3f9d340f60', title: 'Toast', category: 'Breakfast', tags: [] };
+const slowDinner = { ...dinner, id: 'd91c9778-765f-4a74-820c-8b58990ba592', cookTime: 90 };
 
 test('random selection can reach every eligible recipe without filters', () => {
   const recipes = [dinner, breakfast, slowDinner];
