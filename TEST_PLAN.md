@@ -168,6 +168,23 @@ Testing will verify that the application maintains a responsive and accessible l
 | TC-29 | Click button multiple times | Different valide recipes are loaded |
 | TC-30 | Use Surprise Me on mobile | Feature functions correctly on mobile |
 
+#### Dietary Toggles (#65)
+
+| Test ID | Description | Expected Result |
+| ------- | ----------- | --------------- |
+| TC-31 | Select dietary preferences with mouse and keyboard | Vegetarian, vegan, gluten-free, and lactose-free are independent checkboxes on desktop and selectable chips on mobile, with visible checked and focus states |
+| TC-32 | Enable two or three preferences | Every shown recipe has explicit true values for all selected dietary fields; tags alone do not qualify |
+| TC-33 | Turn all dietary preferences off | Recipes return, still respecting search, category, and time |
+| TC-34 | Filter the current API feed by a diet | Missing dietary fields do not qualify; an empty result explains that confirmed dietary information is required |
+| TC-35 | Combine dietary preferences with search, category, cooking time, and Surprise me | All filters apply together; Surprise me never relaxes them |
+| TC-36 | Open Filters on a narrow mobile viewport | The sheet fits, its body scrolls, and Clear all and Show recipes remain reachable |
+
+| TC-37 | Select multiple categories and difficulty levels on desktop | Any selected category and any selected difficulty can match; all other filter groups still apply |
+| TC-38 | Add an excluded ingredient, then remove its chip | Matching ingredient names are excluded without case sensitivity; removing the chip restores eligible recipes |
+| TC-39 | Change mobile filters, then close with X or Escape | Pending selections are discarded; focus returns to the Filters button |
+| TC-40 | Change mobile filters, then use Show recipes | Applied selections update the feed and active chips, and remain selected when reopening |
+| TC-41 | Open the mobile sheet, then resize to desktop | Sheet closes, background scrolling is restored, and the sidebar is visible |
+
 ## 6. Team Contribution
 
 | Role | Responsibility |
