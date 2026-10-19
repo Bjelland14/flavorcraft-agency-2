@@ -25,6 +25,7 @@ function App() {
   const [time, setTime] = useState('');
   const [lastSurpriseRecipeId, setLastSurpriseRecipeId] = useState(null);
   const { pathname } = useLocation();
+  const isRecipeDetail = pathname.startsWith('/recipe');
 
   function handleToggleFavorite(recipe) {
     const next = toggleFavorite(favorites, recipe);
@@ -45,7 +46,7 @@ function App() {
   return (
     <div className="app-shell">
       <Header
-        showSearch={pathname === '/'} search={search} onSearchChange={setSearch}
+        showSearch={pathname === '/' || isRecipeDetail} search={search} onSearchChange={setSearch} isRecipeDetail={isRecipeDetail}
       />
       {favoritesError && <p className="favorites-error" role="alert">{favoritesError}</p>}
       <Routes>
@@ -70,8 +71,14 @@ function App() {
           }
         />
         <Route path="/favorites" element={<Favorites favorites={favorites} onToggleFavorite={handleToggleFavorite} />} />
-        <Route path="/recipe/:id" element={<RecipeDetail />} />
-        <Route path="/recipe" element={<RecipeDetail />} />
+        <Route
+          path="/recipe/:id"
+          element={<RecipeDetail favorites={favorites} onToggleFavorite={handleToggleFavorite} />}
+        />
+        <Route
+          path="/recipe"
+          element={<RecipeDetail favorites={favorites} onToggleFavorite={handleToggleFavorite} />}
+        />
       </Routes>
       <Footer />
       <CookieBanner />
