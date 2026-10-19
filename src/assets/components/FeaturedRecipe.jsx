@@ -52,6 +52,9 @@ function FeaturedRecipe({ recipe, status, isFavorite, onToggleFavorite, onSurpri
               : 'No matching recipes. Try changing your search or filters.'}
           </p>
         )}
+        {recipe && Array.isArray(recipe.ingredients) && <p className="featured-ingredients">
+          {recipe.ingredients.map((ingredient) => ingredient?.name).filter((name) => typeof name === 'string' && name.trim()).slice(0, 3).join(' · ')}
+        </p>}
         <div className="featured-actions">
           <button type="button" className="featured-surprise" disabled={!recipe || status !== 'success'}
             onClick={onSurprise}>

@@ -6,6 +6,7 @@ const dinner = {
   id: 'bfeeef7c-b89a-4e9e-871c-928912a09d61', title: 'Tomato pasta', description: 'A quick tomato pasta for dinner.',
   image: { url: 'https://example.com/pasta.jpg' }, category: 'Dinner',
   prepTime: 5, cookTime: 15, servings: 2, tags: ['Vegetarian'],
+  dietary: { glutenFree: false, lactoseFree: true, vegetarian: true },
   ingredients: [{ name: 'Tomatoes' }, { name: 'Pasta' }],
   instructions: ['Boil the pasta.', 'Add the tomatoes and serve.'],
 };
@@ -20,10 +21,21 @@ test('random selection can reach every eligible recipe without filters', () => {
 });
 
 test('random selection applies search, category, diet, and time together', () => {
-  const filters = { search: 'tomato', category: 'Dinner', diet: 'vegetarian', time: '30' };
+  const filters = { search: 'tomato', category: 'Dinner', diet: ['lactoseFree', 'vegetarian'], time: '30' };
   for (const random of [0, 0.5, 0.999]) {
     assert.equal(pickSurpriseRecipe([breakfast, slowDinner, dinner], filters, null, () => random), dinner);
   }
+});
+
+test('Surprise me respects difficulty and ingredient exclusions', () => {
+  const easyDinner = { ...dinner, difficulty: 'Easy' };
+  const mediumDinner = { ...slowDinner, difficulty: 'Medium' };
+  assert.equal(pickSurpriseRecipe([easyDinner, mediumDinner], {
+    category: ['Dinner'], difficulty: ['Easy'], excludedIngredients: ['beans'],
+  }), easyDinner);
+  assert.equal(pickSurpriseRecipe([easyDinner, mediumDinner], {
+    difficulty: ['Easy'], excludedIngredients: ['tomatoes'],
+  }), null);
 });
 
 test('test recipes and unfinished content are never selected', () => {
@@ -51,11 +63,11 @@ test('avoids the previous recipe whenever another matching recipe exists', () =>
 
 test('allows the sole matching recipe again and never relaxes filters', () => {
   assert.equal(pickSurpriseRecipe([dinner, breakfast], { category: 'Dinner' }, dinner.id), dinner);
-  assert.equal(pickSurpriseRecipe([dinner], { diet: 'vegan' }, dinner.id), null);
+  assert.equal(pickSurpriseRecipe([dinner], { diet: ['glutenFree'] }, dinner.id), null);
 });
 
 test('empty collections and no matching filters return no recipe', () => {
   assert.equal(pickSurpriseRecipe([]), null);
-  assert.equal(pickSurpriseRecipe([dinner], { diet: 'vegan' }), null);
+  assert.equal(pickSurpriseRecipe([dinner], { diet: ['glutenFree'] }), null);
   assert.equal(pickSurpriseRecipe([dinner], { search: 'unmatched' }), null);
 });

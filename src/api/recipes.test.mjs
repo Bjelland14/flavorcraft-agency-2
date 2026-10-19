@@ -5,8 +5,10 @@ import { filterRecipes } from '../utils/filterRecipes.js';
 
 const recipes = [
   { id: '1', title: 'Vegetable pasta', description: 'Quick dinner',
-    tags: ['Vegetarian'], ingredients: [{ name: 'Tomato' }], prepTime: 10, cookTime: 15 },
+    tags: ['Vegetarian'], dietary: { vegetarian: true, glutenFree: false },
+    ingredients: [{ name: 'Tomato' }], prepTime: 10, cookTime: 15 },
   { id: '2', title: 'Rice bowl', tags: ['Vegan', 'Gluten free'],
+    dietary: { vegetarian: true, glutenFree: true, lactoseFree: true },
     ingredients: [{ name: 'Beans' }], prepTime: 5, cookTime: 10 },
   { id: '3', title: 'Roast chicken', tags: [], ingredients: [], prepTime: 15, cookTime: 60 },
 ];
@@ -96,15 +98,15 @@ test('search matches titles, descriptions, tags, and ingredients without case se
 });
 
 test('combines diet and total cooking time with search', () => {
-  assert.deepEqual(filterRecipes(recipes, { diet: 'vegetarian', time: '30', search: 'tomato' }), [recipes[0]]);
-  assert.deepEqual(filterRecipes(recipes, { diet: 'vegan', time: '15' }), [recipes[1]]);
-  assert.deepEqual(filterRecipes(recipes, { diet: 'gluten-free' }), [recipes[1]]);
-  assert.deepEqual(filterRecipes(recipes, { diet: 'vegetarian', time: '15' }), []);
+  assert.deepEqual(filterRecipes(recipes, { diet: ['vegetarian'], time: '30', search: 'tomato' }), [recipes[0]]);
+  assert.deepEqual(filterRecipes(recipes, { diet: ['lactoseFree'], time: '15' }), [recipes[1]]);
+  assert.deepEqual(filterRecipes(recipes, { diet: ['glutenFree'] }), [recipes[1]]);
+  assert.deepEqual(filterRecipes(recipes, { diet: ['vegetarian'], time: '15', search: 'tomato' }), []);
 });
 
 test('missing optional fields do not crash filtering or imply dietary suitability', () => {
   const minimal = [{ id: '1', title: 'Simple meal' }];
   assert.deepEqual(filterRecipes(minimal), minimal);
-  assert.deepEqual(filterRecipes(minimal, { diet: 'vegan' }), []);
+  assert.deepEqual(filterRecipes(minimal, { diet: ['vegetarian'] }), []);
   assert.deepEqual(filterRecipes(minimal, { time: '30' }), []);
 });
