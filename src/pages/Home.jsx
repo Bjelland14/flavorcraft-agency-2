@@ -60,16 +60,18 @@ function Home({
     return () => controller.abort();
   }, [attempt, onCategoriesLoad]);
 
-  const recipes = filterRecipes(result.recipes.filter(isFeedRecipe), { search, category, diet, time });
+  const availableRecipes = result.recipes.filter(isFeedRecipe);
+  const recipes = filterRecipes(availableRecipes, { search, category, diet, time });
   const hasFilters = search.trim() || category || diet || time;
-  const featuredRecipe = recipes.find((recipe) =>
+  // Discovery actions use the whole reviewed collection, regardless of feed filters.
+  const featuredRecipe = availableRecipes.find((recipe) =>
     recipe.category?.trim().toLowerCase() === 'dinner' &&
     recipe.difficulty?.trim().toLowerCase() === 'easy' &&
     recipe.prepTime + recipe.cookTime <= 60
-  ) || recipes.find((recipe) => recipe.category?.trim().toLowerCase() === 'dinner') || recipes[0];
+  ) || availableRecipes.find((recipe) => recipe.category?.trim().toLowerCase() === 'dinner') || availableRecipes[0];
 
   function handleSurprise() {
-    const recipe = pickSurpriseRecipe(result.recipes, { search, category, diet, time }, lastSurpriseRecipeId);
+    const recipe = pickSurpriseRecipe(availableRecipes, lastSurpriseRecipeId);
     if (recipe) {
       onSurpriseRecipeSelected(recipe.id);
       navigate(`/recipe/${encodeURIComponent(recipe.id)}`);

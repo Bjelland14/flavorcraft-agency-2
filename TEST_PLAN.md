@@ -168,6 +168,17 @@ Testing will verify that the application maintains a responsive and accessible l
 | TC-29 | Click button multiple times | Different valide recipes are loaded |
 | TC-30 | Use Surprise Me on mobile | Feature functions correctly on mobile |
 
+#### Independent Discovery (#100)
+
+| Test ID | Description | Expected Result |
+| ------- | ----------- | --------------- |
+| TC-31 | Note Tonight's Pick, then change category, diet, cooking time, and search | Featured recipe remains unchanged; only the feed is filtered |
+| TC-32 | Enter a search or combine filters with no matches | Feed shows its empty state; Tonight's Pick still displays a recipe and Surprise me stays enabled |
+| TC-33 | Click Surprise me while the feed has no matches | Opens a reviewed recipe from the full collection |
+| TC-34 | Repeat Surprise me after returning home | Can reach recipes outside the feed filters and avoids the previous selection when alternatives exist |
+| TC-35 | Repeat with desktop and mobile viewports | Both layouts preserve the independent discovery behavior |
+| TC-36 | Return an empty collection or simulate an API error | No invalid featured recipe is shown; Surprise me is disabled until recipes are available |
+
 ## 6. Team Contribution
 
 | Role | Responsibility |

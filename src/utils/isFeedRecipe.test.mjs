@@ -29,7 +29,7 @@ test('hides the reported brownies and future entries from discovery regardless o
   assert.deepEqual(filterRecipes(visible, { search: 'brownies' }), []);
   assert.deepEqual(filterRecipes(visible), [recipe]);
   for (const random of [0, 0.5, 0.999]) {
-    assert.equal(pickSurpriseRecipe([...unreviewed, recipe], {}, null, () => random), recipe);
+    assert.equal(pickSurpriseRecipe([...unreviewed, recipe], null, () => random), recipe);
   }
   assert.equal(pickSurpriseRecipe(unreviewed), null);
 });
