@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getRecipe } from '../api/recipes';
 import { useRecipeSchema } from '../utils/useRecipeSchema';
+import { SITE_URL, shortDescription, usePageMeta } from '../utils/usePageMeta';
 import '../styles/recipe-detail.css';
 
 function recipeFacts(recipe) {
@@ -80,8 +81,21 @@ function RecipeDetail() {
       ? 'loading'
       : result.status;
 
-   useRecipeSchema(status === 'success' ? result.recipe : null);
 
+  const loadedRecipe = status === 'success' ? result.recipe : null;
+  useRecipeSchema(loadedRecipe);
+  usePageMeta(loadedRecipe
+    ? {
+      title: loadedRecipe.title,
+      description: shortDescription(loadedRecipe.description)
+        || `How to make ${loadedRecipe.title}. Ingredients and step-by-step instructions.`,
+      url: `${SITE_URL}/recipe/${loadedRecipe.id}`,
+      type: 'article',
+      image: loadedRecipe.image?.url,
+      imageAlt: loadedRecipe.image?.alt || loadedRecipe.title,
+    }
+    : { title: status === 'not-found' ? 'Recipe not found' : undefined });
+  
   if (status === 'loading') {
     return (
       <main className="content recipe-detail" aria-busy="true">
