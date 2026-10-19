@@ -1,4 +1,5 @@
 import { useId, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
 import { FavouriteIcon, Image02Icon } from '@hugeicons/core-free-icons';
 import '../../styles/recipe-card.css';
@@ -43,6 +44,10 @@ function RecipeCard({ recipe, isFavorite = false, onToggleFavorite }) {
 
   return (
     <li className="recipe-card" aria-labelledby={titleId}>
+      <Link className="recipe-card-link" to={`/recipe/${encodeURIComponent(recipe.id)}`}
+        aria-label={`Open ${recipe.title}`}>
+        <span className="sr-only">Open recipe</span>
+      </Link>
       <RecipePhoto key={recipe.image?.url || 'no-photo'}
         url={recipe.image?.url} alt={recipe.image?.alt || recipe.title} />
       <div className="recipe-card-content">
