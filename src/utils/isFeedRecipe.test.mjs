@@ -2,9 +2,10 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { isFeedRecipe } from './isFeedRecipe.js';
 import { filterRecipes } from './filterRecipes.js';
+import { pickSurpriseRecipe } from './surpriseRecipe.js';
 
 const recipe = {
-  id: 'real-recipe',
+  id: 'db0b5880-e53a-4850-ba5f-3c3236c6f252',
   title: 'Tomato salad',
   description: 'Fresh tomatoes with olive oil.',
   image: { url: 'https://example.com/tomato-salad.jpg', alt: 'Tomato salad' },
@@ -14,6 +15,32 @@ const recipe = {
   ingredients: [{ name: 'Tomatoes' }, { name: 'Olive oil' }],
   instructions: ['Chop the tomatoes.', 'Drizzle with olive oil and serve.'],
 };
+
+test('hides the reported brownies and future entries from discovery regardless of their title or content', () => {
+  const unreviewed = [
+    { ...recipe, id: '03009beb-f6e9-40dc-9164-22cbcc5881f9', title: 'brownies',
+      description: 'blablablaabl', instructions: ['Follow instructions'] },
+    { ...recipe, id: 'future-test', title: 'A convincing new dinner recipe' },
+    { ...recipe, id: 'future-copy', source: 'static' },
+    { ...recipe, id: 'future-duplicate-title' },
+  ];
+  assert.deepEqual(unreviewed.filter(isFeedRecipe), []);
+  const visible = [...unreviewed, recipe].filter(isFeedRecipe);
+  assert.deepEqual(filterRecipes(visible, { search: 'brownies' }), []);
+  assert.deepEqual(filterRecipes(visible), [recipe]);
+  for (const random of [0, 0.5, 0.999]) {
+    assert.equal(pickSurpriseRecipe([...unreviewed, recipe], {}, null, () => random), recipe);
+  }
+  assert.equal(pickSurpriseRecipe(unreviewed), null);
+});
+
+test('keeps reviewed simple recipes with fewer than three ingredients', () => {
+  const juice = { ...recipe, id: '5da54af6-27ab-4340-82f6-4cf0b884263f',
+    title: 'Fresh Orange Juice', ingredients: [{ name: 'Oranges' }],
+    instructions: ['Cut oranges in half.', 'Squeeze the juice and serve.'] };
+  assert.equal(isFeedRecipe(juice), true);
+  assert.equal(pickSurpriseRecipe([juice]), juice);
+});
 
 test('hides known test titles with different case and whitespace', () => {
   for (const title of ['my title', 'vv', 'nbn', 'testt', ' My   TITLE ', ' VV ', 'TESTT']) {
@@ -64,7 +91,7 @@ test('hides descriptions containing only test or testing', () => {
 });
 
 test('excludes known test IDs from the feed and search while preserving other complete recipes', () => {
-  const complete = { ...recipe, id: 'complete-pasta', title: 'Creamy Garlic Pasta',
+  const complete = { ...recipe, id: 'bfeeef7c-b89a-4e9e-871c-928912a09d61', title: 'Creamy Garlic Pasta',
     description: 'A quick pasta dish, perfect for testing the recipe form.' };
   const blocked = { ...complete, id: 'b4a637c2-2a64-4a03-b33f-1d773a084033' };
   const unfinished = { ...recipe, id: 'unfinished-pasta', title: 'Spagetti', description: 'testing' };
@@ -102,7 +129,7 @@ test('hides recipes without a photo URL', () => {
 });
 
 test('keeps complete recipes with photos regardless of duplicate titles or mentions of testing', () => {
-  const complete = [recipe, { ...recipe, id: 'another-recipe', description: 'A complete recipe used for testing.' }];
+  const complete = [recipe, { ...recipe, id: '79783d40-2339-47ad-840a-9e3f9d340f60', description: 'A complete recipe used for testing.' }];
   assert.deepEqual(complete.filter(isFeedRecipe), complete);
   assert.equal(isFeedRecipe({ ...recipe, title: 'Tiramisu' }), true);
   assert.equal(isFeedRecipe({ ...recipe, title: 'Pad Thai' }), true);

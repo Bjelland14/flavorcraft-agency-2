@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getRecipe } from '../api/recipes';
 import { getStaticRecipe } from '../utils/recipeCollection';
+import { useRecipeSchema } from '../utils/useRecipeSchema';
 import '../styles/recipe-detail.css';
 
 function recipeFacts(recipe) {
@@ -82,6 +83,8 @@ function RecipeDetail() {
     : result.id !== id || result.attempt !== attempt
       ? 'loading'
       : result.status;
+
+   useRecipeSchema(status === 'success' ? result.recipe : null);
 
   if (status === 'loading') {
     return (
