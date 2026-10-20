@@ -3,7 +3,7 @@
 
 import { useEffect } from 'react';
 
-export const SITE_URL = 'https://flavorcraft-team-beta.netlify.app';
+export const SITE_URL = 'https://flavorcraft-team-beta.vercel.app';
 
 const DEFAULTS = {
   title: 'FlavorCraft – Find a dinner idea in seconds',
