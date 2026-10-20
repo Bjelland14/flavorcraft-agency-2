@@ -289,18 +289,21 @@
 .ingredients-panel h2 span,
 .steps-panel h2 span,
 .comments-panel h2 span {
+  display: inline-block;
   color: var(--color-muted);
   font-family: var(--font-ui);
   font-size: 14px;
   font-weight: 500;
+  line-height: 20px;
   letter-spacing: 0;
+  vertical-align: 2px;
 }
 
 .ingredients-serving {
   margin: 4px 0 16px;
   color: var(--color-muted);
-  font-size: 12px;
-  line-height: 16px;
+  font-size: 16px;
+  line-height: 24px;
 }
 
 .ingredient-list {
@@ -353,13 +356,17 @@
   text-align: center;
 }
 
-.ingredient-list input:checked ~ span {
+.ingredient-list input:checked ~ span:not(.ingredient-amount) {
   text-decoration: line-through;
 }
 
 .ingredient-amount {
   font-weight: 700;
   white-space: nowrap;
+}
+
+.ingredient-list label.is-checked .ingredient-amount {
+  color: var(--color-ink);
 }
 
 .section-heading-row {
@@ -375,8 +382,9 @@
   gap: 7px;
   margin: 0;
   color: var(--color-muted);
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 500;
+  line-height: 24px;
   white-space: nowrap;
 }
 
@@ -674,6 +682,10 @@
 
   .serving-control button {
     background: var(--color-sage);
+  }
+
+  .start-cooking {
+    box-shadow: 0 4px 10px 0 var(--color-terracotta);
   }
 }
 

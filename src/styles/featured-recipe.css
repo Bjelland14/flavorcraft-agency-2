@@ -160,6 +160,12 @@
   color: var(--color-muted);
 }
 
+@media (max-width: 767px) {
+  .featured-surprise:not(:disabled) {
+    box-shadow: 0 4px 10px 0 var(--color-terracotta);
+  }
+}
+
 .featured-message {
   margin: 12px 0 0;
   color: var(--color-muted);
