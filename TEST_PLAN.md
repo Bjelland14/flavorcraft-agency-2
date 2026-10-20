@@ -185,6 +185,16 @@ Testing will verify that the application maintains a responsive and accessible l
 | TC-40 | Change mobile filters, then use Show recipes | Applied selections update the feed and active chips, and remain selected when reopening |
 | TC-41 | Open the mobile sheet, then resize to desktop | Sheet closes, background scrolling is restored, and the sidebar is visible |
 
+### Search and Filter Navigation Reset (#101)
+
+| Test ID | Description | Expected Result |
+| ------- | ----------- | --------------- |
+| TC-42 | Search and apply category, diet, time, difficulty, and ingredient exclusions; visit Favorites, then return using Home or browser Back | Search is empty, every filter is at its default, and the full default feed is displayed; saved favorites remain |
+| TC-43 | Search and apply filters, open a featured recipe or recipe card, then return | Search and filters reset; a new search and filter selection still work |
+| TC-44 | Search and apply filters, then click the logo or Home while already on the homepage | Search and all filters reset even though the pathname stays the same |
+| TC-45 | Type a search, then navigate away and back before the 350 ms debounce finishes | The old query never reappears in the input or recipe results |
+| TC-46 | Apply mobile filters, navigate away and back, then reopen Filters; repeat with unapplied selections | The sheet opens with default values and no old ingredient chips or pending selections; background scrolling works |
+
 ## 6. Team Contribution
 
 | Role | Responsibility |
