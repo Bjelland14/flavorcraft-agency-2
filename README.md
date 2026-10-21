@@ -1,7 +1,9 @@
 # FlavorCraft 
 Recipe discovery web app for FlavorCraft Labs – Team Beta (Agency 2)
 
-**Live site:** https://flavorcraft-team-beta.netlify.app
+**Live site:** https://flavorcraft-team-beta.vercel.app
+
+**Old site (Netlify, not updated after 19 Oct):** https://flavorcraft-team-beta.netlify.app. We moved to Vercel because we used up our free Netlify credits.
 
 ## Installation
 
