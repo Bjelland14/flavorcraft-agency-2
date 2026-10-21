@@ -1,3 +1,6 @@
+import { APPROVED_RECIPE_IDS } from '../data/approvedRecipeIds.js';
+import { getStaticRecipe } from './recipeCollection.js';
+
 const TEST_TITLES = new Set(['my title', 'vv', 'nbn', 'testt']);
 const TEST_RECIPE_IDS = new Set([
   'b4a637c2-2a64-4a03-b33f-1d773a084033', // Creamy Garlic Pasta: recipe-form test entry.
@@ -19,9 +22,10 @@ function hasRealContent(value) {
 
 export function isFeedRecipe(recipe) {
   if (!recipe) return false;
-  if (recipe.source === 'static') return true;
 
-  if (TEST_RECIPE_IDS.has(recipe.id)) return false;
+  if (getStaticRecipe(recipe.id)) return true;
+
+  if (!APPROVED_RECIPE_IDS.has(recipe.id) || TEST_RECIPE_IDS.has(recipe.id)) return false;
 
   if (typeof recipe.image?.url !== 'string' || !recipe.image.url.trim()) {
     return false;

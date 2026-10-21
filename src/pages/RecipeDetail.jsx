@@ -13,6 +13,9 @@ import {
 } from '@hugeicons/core-free-icons';
 import { getRecipe } from '../api/recipes';
 import logo from '../assets/logo.svg';
+import { getStaticRecipe } from '../utils/recipeCollection';
+import { useRecipeSchema } from '../utils/useRecipeSchema';
+import { SITE_URL, shortDescription, usePageMeta } from '../utils/usePageMeta';
 import '../styles/recipe-detail.css';
 import { getStaticRecipe } from '../utils/recipeCollection';
 
@@ -383,6 +386,21 @@ function RecipeDetail({ favorites = [], onToggleFavorite }) {
     };
   }, [id]);
 
+
+  const loadedRecipe = status === 'success' ? (staticRecipe || result.recipe) : null;
+  useRecipeSchema(loadedRecipe);
+  usePageMeta(loadedRecipe
+    ? {
+      title: loadedRecipe.title,
+      description: shortDescription(loadedRecipe.description)
+        || `How to make ${loadedRecipe.title}. Ingredients and step-by-step instructions.`,
+      url: `${SITE_URL}/recipe/${loadedRecipe.id}`,
+      type: 'article',
+      image: loadedRecipe.image?.url,
+      imageAlt: loadedRecipe.image?.alt || loadedRecipe.title,
+    }
+    : { title: status === 'not-found' ? 'Recipe not found' : undefined });
+  
   if (status === 'loading') {
     return (
       <main className="content recipe-detail recipe-detail-message" aria-busy="true">

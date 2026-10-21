@@ -1,7 +1,9 @@
 # FlavorCraft 
 Recipe discovery web app for FlavorCraft Labs – Team Beta (Agency 2)
 
-**Live site:** https://flavorcraft-team-beta.netlify.app
+**Live site:** https://flavorcraft-team-beta.vercel.app
+
+**Old site (Netlify, not updated after 19 Oct):** https://flavorcraft-team-beta.netlify.app. We moved to Vercel because we used up our free Netlify credits.
 
 ## Installation
 
@@ -33,6 +35,41 @@ The project uses the following structure:
 - `src/data/` – Static recipe list (recipes.json)
 - `src/utils/` – Helper functions (filters, Recipe schema)
 - `src/styles/` – Global and component styles
+
+## Shared API recipe review (#83)
+
+The feed, search, category options, Surprise me, and restored favorites use
+`isFeedRecipe`. Only API IDs listed in `src/data/approvedRecipeIds.js` can pass
+this check, alongside the existing content and photo checks. New shared-API
+entries are hidden by default, even if they copy a reviewed recipe's title.
+
+To include another API recipe, review its description, ingredients, instructions,
+and photo, then add its exact ID and a title comment to that file. Remove its ID
+if it becomes test content. Simple recipes can still qualify with fewer than
+three ingredients. The static JSON recipe collection is currently unused by the
+feed; a `source: 'static'` field from the shared API does not bypass review.
+
+## Dietary toggles (#65)
+
+Desktop filters live in a sidebar. On mobile, Filters opens a sheet with draft
+selections; Show recipes applies them, while closing the sheet cancels them.
+Clear all resets the filters, and active chips remove individual selections.
+
+Diet includes independent vegetarian, vegan, gluten-free, and lactose-free options.
+Selected preferences combine with AND, alongside search, category, time,
+difficulty, and ingredient exclusions. Categories and difficulty levels allow
+multiple selections, matching any selected value within each group.
+Filtering uses explicit `true` values in `dietary.glutenFree`,
+`dietary.lactoseFree`, `dietary.vegetarian`, and `dietary.vegan`; tags are not dietary evidence.
+Surprise me uses the same filters.
+
+Ingredient exclusions match case-insensitive text in ingredient names. They are
+not an allergen classification system; users still need to check ingredients.
+
+The feed still uses the reviewed API recipes. Those recipes currently have no
+`dietary` fields, so selecting a diet returns no matches until the API
+provides confirmed dietary data. The static collection remains unused by the
+feed; its dietary fields are covered by the filter tests.
 
 ## Routing
 

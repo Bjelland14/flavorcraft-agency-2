@@ -30,12 +30,10 @@ function saveConsent(value) {
 }
 
 export default function CookieBanner() {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(() => !readConsent());
 
   useEffect(() => {
-    const consent = readConsent();
-    if (consent === 'accepted') loadClarity();
-    if (!consent) setVisible(true);
+    if (readConsent() === 'accepted') loadClarity();
   }, []);
 
   const accept = () => {
