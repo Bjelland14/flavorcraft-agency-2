@@ -1,7 +1,10 @@
 import '../styles/home.css';
 import RecipeCard from '../assets/components/RecipeCard';
+import { usePageMeta } from '../utils/usePageMeta';
 
 function Favorites({ favorites, onToggleFavorite }) {
+  usePageMeta({ title: 'Favorites', description: 'Your saved FlavorCraft recipes, all in one place.' });
+
   return (
     <main className="content">
       <section className="recipe-area" aria-labelledby="favorites-heading">

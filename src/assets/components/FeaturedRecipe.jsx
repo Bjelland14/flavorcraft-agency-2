@@ -44,7 +44,7 @@ function FeaturedRecipe({ recipe, status, isFavorite, onToggleFavorite, onSurpri
           <p className="featured-message">
             {status === 'loading' ? 'Finding recipes for you…' : status === 'error'
               ? 'Load the recipes below to find your next meal.'
-              : 'No matching recipes. Try changing your search or filters.'}
+              : 'No recipes available yet.'}
           </p>
         )}
         {recipe && Array.isArray(recipe.ingredients) && <p className="featured-ingredients">
