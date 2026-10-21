@@ -12,6 +12,7 @@ const recipe = {
   prepTime: 10,
   cookTime: 0,
   tags: ['Vegan'],
+  dietary: { vegetarian: true },
   ingredients: [{ name: 'Tomatoes' }, { name: 'Olive oil' }],
   instructions: ['Chop the tomatoes.', 'Drizzle with olive oil and serve.'],
 };
@@ -141,6 +142,6 @@ test('hidden recipes cannot reappear when searching or clearing filters', () => 
     .filter(isFeedRecipe);
   assert.deepEqual(filterRecipes(visible, { search: 'testt' }), []);
   assert.deepEqual(filterRecipes(visible, { search: 'Pad Thai' }), []);
-  assert.deepEqual(filterRecipes(visible, { search: 'tomato', diet: 'vegan', time: '15' }), [recipe]);
+  assert.deepEqual(filterRecipes(visible, { search: 'tomato', diet: ['vegetarian'], time: '15' }), [recipe]);
   assert.deepEqual(filterRecipes(visible), [recipe]);
 });

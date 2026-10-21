@@ -168,16 +168,33 @@ Testing will verify that the application maintains a responsive and accessible l
 | TC-29 | Click button multiple times | Different valide recipes are loaded |
 | TC-30 | Use Surprise Me on mobile | Feature functions correctly on mobile |
 
+#### Dietary Toggles (#65)
+
+| Test ID | Description | Expected Result |
+| ------- | ----------- | --------------- |
+| TC-31 | Select dietary preferences with mouse and keyboard | Vegetarian, vegan, gluten-free, and lactose-free are independent checkboxes on desktop and selectable chips on mobile, with visible checked and focus states |
+| TC-32 | Enable two or three preferences | Every shown recipe has explicit true values for all selected dietary fields; tags alone do not qualify |
+| TC-33 | Turn all dietary preferences off | Recipes return, still respecting search, category, and time |
+| TC-34 | Filter the current API feed by a diet | Missing dietary fields do not qualify; an empty result explains that confirmed dietary information is required |
+| TC-35 | Combine dietary preferences with search, category, and cooking time | All filters apply together to the recipe feed; Tonight's Pick and Surprise me remain independent |
+| TC-36 | Open Filters on a narrow mobile viewport | The sheet fits, its body scrolls, and Clear all and Show recipes remain reachable |
+
+| TC-37 | Select multiple categories and difficulty levels on desktop | Any selected category and any selected difficulty can match; all other filter groups still apply |
+| TC-38 | Add an excluded ingredient, then remove its chip | Matching ingredient names are excluded without case sensitivity; removing the chip restores eligible recipes |
+| TC-39 | Change mobile filters, then close with X or Escape | Pending selections are discarded; focus returns to the Filters button |
+| TC-40 | Change mobile filters, then use Show recipes | Applied selections update the feed and active chips, and remain selected when reopening |
+| TC-41 | Open the mobile sheet, then resize to desktop | Sheet closes, background scrolling is restored, and the sidebar is visible |
+
 #### Independent Discovery (#100)
 
 | Test ID | Description | Expected Result |
 | ------- | ----------- | --------------- |
-| TC-31 | Note Tonight's Pick, then change category, diet, cooking time, and search | Featured recipe remains unchanged; only the feed is filtered |
-| TC-32 | Enter a search or combine filters with no matches | Feed shows its empty state; Tonight's Pick still displays a recipe and Surprise me stays enabled |
-| TC-33 | Click Surprise me while the feed has no matches | Opens a reviewed recipe from the full collection |
-| TC-34 | Repeat Surprise me after returning home | Can reach recipes outside the feed filters and avoids the previous selection when alternatives exist |
-| TC-35 | Repeat with desktop and mobile viewports | Both layouts preserve the independent discovery behavior |
-| TC-36 | Return an empty collection or simulate an API error | No invalid featured recipe is shown; Surprise me is disabled until recipes are available |
+| TC-42 | Note Tonight's Pick, then change category, diet, cooking time, difficulty, ingredient exclusions, and search | Featured recipe remains unchanged; only the feed is filtered |
+| TC-43 | Enter a search or combine filters with no matches | Feed shows its empty state; Tonight's Pick still displays a recipe and Surprise me stays enabled |
+| TC-44 | Click Surprise me while the feed has no matches | Opens a reviewed recipe from the full collection |
+| TC-45 | Repeat Surprise me after returning home | Can reach recipes outside the feed filters and avoids the previous selection when alternatives exist |
+| TC-46 | Repeat with desktop and mobile viewports | Both layouts preserve the independent discovery behavior |
+| TC-47 | Return an empty collection or simulate an API error | No invalid featured recipe is shown; Surprise me is disabled until recipes are available |
 
 ## 6. Team Contribution
 

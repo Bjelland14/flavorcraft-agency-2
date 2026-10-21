@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Favorites from './pages/Favorites';
 import RecipeDetail from './pages/RecipeDetail';
 import { readFavorites, toggleFavorite, writeFavorites } from './utils/favorites';
+import { EMPTY_FILTERS } from './utils/recipeFilters';
 
 function App() {
   const [favorites, setFavorites] = useState(() => {
@@ -19,10 +20,8 @@ function App() {
   const [favoritesError, setFavoritesError] = useState('');
   const [search, setSearch] = useState('');
   const [debouncedSearch, setDebouncedSearch] = useState('');
-  const [category, setCategory] = useState('');
+  const [filters, setFilters] = useState(EMPTY_FILTERS);
   const [categories, setCategories] = useState([]);
-  const [diet, setDiet] = useState('');
-  const [time, setTime] = useState('');
   const [lastSurpriseRecipeId, setLastSurpriseRecipeId] = useState(null);
   const { pathname } = useLocation();
 
@@ -54,14 +53,10 @@ function App() {
           element={
             <Home
               search={debouncedSearch}
-              category={category}
-              diet={diet}
-              time={time}
+              filters={filters}
+              onFiltersChange={setFilters}
               onCategoriesLoad={setCategories}
               categories={categories}
-              onCategoryChange={setCategory}
-              onDietChange={setDiet}
-              onTimeChange={setTime}
               favorites={favorites}
               onToggleFavorite={handleToggleFavorite}
               lastSurpriseRecipeId={lastSurpriseRecipeId}

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { getRecipe } from '../api/recipes';
+import { getStaticRecipe } from '../utils/recipeCollection';
+import { useRecipeSchema } from '../utils/useRecipeSchema';
 import '../styles/recipe-detail.css';
 
 function recipeFacts(recipe) {
@@ -41,12 +43,13 @@ function ingredientText(ingredient, servings) {
 
 function RecipeDetail() {
   const { id } = useParams();
+  const staticRecipe = getStaticRecipe(id);
   const [result, setResult] = useState({ id: null, attempt: -1, status: 'loading', recipe: null });
   const [attempt, setAttempt] = useState(0);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
 
   useEffect(() => {
-    if (!id) {
+    if (!id || staticRecipe) {
       return undefined;
     }
 
@@ -71,13 +74,17 @@ function RecipeDetail() {
       });
 
     return () => controller.abort();
-  }, [id, attempt]);
+  }, [id, attempt, staticRecipe]);
 
   const status = !id
     ? 'not-found'
+    : staticRecipe
+      ? 'success'
     : result.id !== id || result.attempt !== attempt
       ? 'loading'
       : result.status;
+
+   useRecipeSchema(status === 'success' ? result.recipe : null);
 
   if (status === 'loading') {
     return (
@@ -110,7 +117,7 @@ function RecipeDetail() {
     );
   }
 
-  const { recipe } = result;
+  const recipe = staticRecipe || result.recipe;
   const servingCount = Number.isFinite(recipe.servings) && recipe.servings > 0 ? recipe.servings : 1;
   const ingredients = Array.isArray(recipe.ingredients)
     ? recipe.ingredients.map((ingredient) => ingredientText(ingredient, servingCount)).filter(Boolean)

@@ -6,12 +6,13 @@ import '../../styles/featured-recipe.css';
 
 function FeaturedPhoto({ recipe }) {
   const [failed, setFailed] = useState(false);
+  const imageUrl = recipe.image?.url;
   return (
     <div className="featured-photo">
-      {!failed ? (
-        <img src={recipe.image.url} alt={recipe.image.alt || recipe.title}
+      {imageUrl && !failed ? (
+        <img src={imageUrl} alt={recipe.image.alt || recipe.title}
           fetchPriority="high" onError={() => setFailed(true)} />
-      ) : <span>Recipe photo unavailable</span>}
+      ) : <span>{imageUrl ? 'Recipe photo unavailable' : 'No photo provided'}</span>}
     </div>
   );
 }
@@ -27,7 +28,7 @@ function FeaturedRecipe({ recipe, status, isFavorite, onToggleFavorite, onSurpri
         <HugeiconsIcon icon={StarIcon} size={13} fill="currentColor" aria-hidden="true" />
         Tonight’s pick
       </span>
-      {recipe && <FeaturedPhoto key={recipe.image.url} recipe={recipe} />}
+      {recipe && <FeaturedPhoto key={recipe.image?.url || 'no-photo'} recipe={recipe} />}
       {recipe && (
         <button type="button" className="featured-favorite" aria-label={favoriteLabel}
           title={favoriteLabel} aria-pressed={isFavorite} onClick={() => onToggleFavorite(recipe)}>
@@ -51,6 +52,9 @@ function FeaturedRecipe({ recipe, status, isFavorite, onToggleFavorite, onSurpri
               : 'No recipes available yet.'}
           </p>
         )}
+        {recipe && Array.isArray(recipe.ingredients) && <p className="featured-ingredients">
+          {recipe.ingredients.map((ingredient) => ingredient?.name).filter((name) => typeof name === 'string' && name.trim()).slice(0, 3).join(' · ')}
+        </p>}
         <div className="featured-actions">
           <button type="button" className="featured-surprise" disabled={!recipe || status !== 'success'}
             onClick={onSurprise}>

@@ -7,6 +7,7 @@ const dinner = {
   id: 'bfeeef7c-b89a-4e9e-871c-928912a09d61', title: 'Tomato pasta', description: 'A quick tomato pasta for dinner.',
   image: { url: 'https://example.com/pasta.jpg' }, category: 'Dinner',
   prepTime: 5, cookTime: 15, servings: 2, tags: ['Vegetarian'],
+  dietary: { glutenFree: false, lactoseFree: true, vegetarian: true },
   ingredients: [{ name: 'Tomatoes' }, { name: 'Pasta' }],
   instructions: ['Boil the pasta.', 'Add the tomatoes and serve.'],
 };
@@ -23,8 +24,10 @@ test('random selection can reach every eligible recipe without filters', () => {
 test('discovery can reach every available recipe even when the feed has no search or filter matches', () => {
   const recipes = [dinner, breakfast, slowDinner];
   for (const filters of [
-    { search: 'unmatched' }, { category: 'Dessert' }, { diet: 'vegan' }, { time: '1' },
-    { search: 'unmatched', category: 'Dessert', diet: 'vegan', time: '1' },
+    { search: 'unmatched' }, { category: ['Dessert'] }, { diet: ['vegan'] }, { time: '1' },
+    { difficulty: ['Hard'] }, { excludedIngredients: ['tomatoes'] },
+    { search: 'unmatched', category: ['Dessert'], diet: ['vegan'], time: '1',
+      difficulty: ['Hard'], excludedIngredients: ['tomatoes'] },
   ]) {
     assert.deepEqual(filterRecipes(recipes, filters), []);
     assert.equal(pickSurpriseRecipe(recipes, null, () => 0), dinner);
