@@ -134,24 +134,21 @@ function Home({
         key === 'time' ? '' : filters[key].filter((item) => item !== value),
     });
   }
+  // Discovery uses the full reviewed collection, independently of feed filters.
   const featuredRecipe =
-    recipes.find(
+    feedRecipes.find(
       (recipe) =>
         recipe.category?.trim().toLowerCase() === 'dinner' &&
         recipe.difficulty?.trim().toLowerCase() === 'easy' &&
         recipe.prepTime + recipe.cookTime <= 60
     ) ||
-    recipes.find(
+    feedRecipes.find(
       (recipe) => recipe.category?.trim().toLowerCase() === 'dinner'
     ) ||
-    recipes[0];
+    feedRecipes[0];
 
   function handleSurprise() {
-    const recipe = pickSurpriseRecipe(
-      result.recipes,
-      { search, ...filters },
-      lastSurpriseRecipeId
-    );
+    const recipe = pickSurpriseRecipe(feedRecipes, lastSurpriseRecipeId);
     if (recipe) {
       onSurpriseRecipeSelected(recipe.id);
       navigate(`/recipe/${encodeURIComponent(recipe.id)}`);
