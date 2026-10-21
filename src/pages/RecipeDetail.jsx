@@ -86,7 +86,7 @@ function RecipeDetail() {
       : result.status;
 
 
-  const loadedRecipe = status === 'success' ? result.recipe : null;
+  const loadedRecipe = status === 'success' ? (staticRecipe || result.recipe) : null;
   useRecipeSchema(loadedRecipe);
   usePageMeta(loadedRecipe
     ? {
