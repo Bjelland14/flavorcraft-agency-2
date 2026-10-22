@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Search01Icon, Home01Icon, FavouriteIcon } from '@hugeicons/core-free-icons';
+import { Search01Icon, Home01Icon, FavouriteIcon, UserIcon } from '@hugeicons/core-free-icons';
 import logo from '../logo.svg';
 import '../../styles/header.css';
 
@@ -8,9 +8,10 @@ function Header({
   showSearch,
   search,
   onSearchChange,
+  isRecipeDetail = false,
 }) {
   return (
-    <header className="header">
+    <header className={`header${isRecipeDetail ? ' header--recipe-detail' : ''}`}>
       <div className="header-inner">
         <NavLink to="/" end className="header-brand" aria-label="FlavorCraft home">
           <img className="brand-logo" src={logo} alt="" aria-hidden="true" />
@@ -44,6 +45,10 @@ function Header({
               <HugeiconsIcon icon={FavouriteIcon} size={20} aria-hidden="true" />
               <span>Favorites</span>
             </NavLink>
+            <button className="top-nav-link" type="button" aria-label="Log in">
+              <HugeiconsIcon icon={UserIcon} size={20} aria-hidden="true" />
+              <span>Log in</span>
+            </button>
           </nav>
         </div>
       </div>
