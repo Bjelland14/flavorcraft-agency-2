@@ -51,11 +51,11 @@ export function shortDescription(text, maxLength = 155) {
   return `${clean.slice(0, maxLength - 1).replace(/\s+\S*$/, '')}…`;
 }
 
-export function usePageMeta({ title, description, url, type, image, imageAlt } = {}) {
+export function usePageMeta({ title, fullTitle, description, url, type, image, imageAlt } = {}) {
   useEffect(() => {
-    const fullTitle = title ? `${title} – FlavorCraft` : DEFAULTS.title;
+    const resolvedTitle = fullTitle || (title ? `${title} – FlavorCraft` : DEFAULTS.title);
     applyMeta({
-      title: fullTitle,
+      title: resolvedTitle,
       description: description || DEFAULTS.description,
       ogDescription: description || DEFAULTS.ogDescription,
       url: url || DEFAULTS.url,
@@ -65,5 +65,5 @@ export function usePageMeta({ title, description, url, type, image, imageAlt } =
     });
 
     return () => applyMeta(DEFAULTS);
-  }, [title, description, url, type, image, imageAlt]);
+  }, [title, fullTitle, description, url, type, image, imageAlt]);
 }
