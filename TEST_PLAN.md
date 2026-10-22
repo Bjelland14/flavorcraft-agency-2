@@ -196,6 +196,17 @@ Testing will verify that the application maintains a responsive and accessible l
 | TC-46 | Repeat with desktop and mobile viewports | Both layouts preserve the independent discovery behavior |
 | TC-47 | Return an empty collection or simulate an API error | No invalid featured recipe is shown; Surprise me is disabled until recipes are available |
 
+#### Favorite Micro Animation (#62)
+
+| Test ID | Description | Expected Result |
+| ------- | ----------- | --------------- |
+| TC-62-01 | Save a recipe from a card or Tonight's Pick | Heart springs into a list icon; both controls show the saved state and expose the updated label and pressed state |
+| TC-62-02 | Remove a saved recipe on the home page | List springs back into a heart; the recipe is removed from Favorites |
+| TC-62-03 | Toggle repeatedly before the spring finishes | Animation reverses smoothly and ends in the latest selected state |
+| TC-62-04 | Enable reduced motion, then save and remove | Icons crossfade without rotation or scaling; saving and removing still work |
+| TC-62-05 | Use keyboard on desktop and tap on mobile | Enter/Space and touch toggle favorites; keyboard focus remains visible and touch targets stay at least 44px |
+| TC-62-06 | Reload after saving, then open Favorites | Saved recipes retain their list icon without replaying the animation on mount; removing a favorite updates the list immediately |
+
 ## 6. Team Contribution
 
 | Role | Responsibility |
