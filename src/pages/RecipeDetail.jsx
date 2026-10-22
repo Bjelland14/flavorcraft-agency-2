@@ -17,7 +17,6 @@ import { getStaticRecipe } from '../utils/recipeCollection';
 import { useRecipeSchema } from '../utils/useRecipeSchema';
 import { SITE_URL, shortDescription, usePageMeta } from '../utils/usePageMeta';
 import '../styles/recipe-detail.css';
-import { getStaticRecipe } from '../utils/recipeCollection';
 
 function formatQuantity(quantity) {
   return new Intl.NumberFormat('en', { maximumFractionDigits: 2 }).format(quantity);
