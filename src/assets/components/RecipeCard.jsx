@@ -1,7 +1,8 @@
 import { useId, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { FavouriteIcon, Image02Icon } from '@hugeicons/core-free-icons';
+import { Image02Icon } from '@hugeicons/core-free-icons';
+import FavoriteButton from './FavoriteButton';
 import '../../styles/recipe-card.css';
 
 const DIET_LABELS = {
@@ -40,7 +41,6 @@ function RecipeCard({ recipe, isFavorite = false, onToggleFavorite }) {
       .filter((name) => typeof name === 'string' && name.trim()).slice(0, 3)
     : [];
   const hasTime = Number.isFinite(recipe.prepTime) && Number.isFinite(recipe.cookTime);
-  const favoriteLabel = `${isFavorite ? 'Remove' : 'Save'} ${recipe.title} ${isFavorite ? 'from' : 'to'} favorites`;
 
   return (
     <li className="recipe-card" aria-labelledby={titleId}>
@@ -71,12 +71,8 @@ function RecipeCard({ recipe, isFavorite = false, onToggleFavorite }) {
           </p>
         )}
       </div>
-      <button type="button" className="recipe-card-favorite" aria-label={favoriteLabel}
-        title={favoriteLabel} aria-pressed={isFavorite} disabled={!onToggleFavorite}
-        onClick={() => onToggleFavorite(recipe)}>
-        <HugeiconsIcon icon={FavouriteIcon} size={22} aria-hidden="true"
-          fill={isFavorite ? 'currentColor' : 'none'} />
-      </button>
+      <FavoriteButton className="recipe-card-favorite" recipe={recipe}
+        isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />
     </li>
   );
 }

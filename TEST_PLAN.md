@@ -176,7 +176,7 @@ Testing will verify that the application maintains a responsive and accessible l
 | TC-32 | Enable two or three preferences | Every shown recipe has explicit true values for all selected dietary fields; tags alone do not qualify |
 | TC-33 | Turn all dietary preferences off | Recipes return, still respecting search, category, and time |
 | TC-34 | Filter the current API feed by a diet | Missing dietary fields do not qualify; an empty result explains that confirmed dietary information is required |
-| TC-35 | Combine dietary preferences with search, category, cooking time, and Surprise me | All filters apply together; Surprise me never relaxes them |
+| TC-35 | Combine dietary preferences with search, category, and cooking time | All filters apply together to the recipe feed; Tonight's Pick and Surprise me remain independent |
 | TC-36 | Open Filters on a narrow mobile viewport | The sheet fits, its body scrolls, and Clear all and Show recipes remain reachable |
 
 | TC-37 | Select multiple categories and difficulty levels on desktop | Any selected category and any selected difficulty can match; all other filter groups still apply |
@@ -185,15 +185,37 @@ Testing will verify that the application maintains a responsive and accessible l
 | TC-40 | Change mobile filters, then use Show recipes | Applied selections update the feed and active chips, and remain selected when reopening |
 | TC-41 | Open the mobile sheet, then resize to desktop | Sheet closes, background scrolling is restored, and the sidebar is visible |
 
-### Search and Filter Navigation Reset (#101)
+#### Independent Discovery (#100)
 
 | Test ID | Description | Expected Result |
 | ------- | ----------- | --------------- |
-| TC-42 | Search and apply category, diet, time, difficulty, and ingredient exclusions; visit Favorites, then return using Home or browser Back | Search is empty, every filter is at its default, and the full default feed is displayed; saved favorites remain |
-| TC-43 | Search and apply filters, open a featured recipe or recipe card, then return | Search and filters reset; a new search and filter selection still work |
-| TC-44 | Search and apply filters, then click the logo or Home while already on the homepage | Search and all filters reset even though the pathname stays the same |
-| TC-45 | Type a search, then navigate away and back before the 350 ms debounce finishes | The old query never reappears in the input or recipe results |
-| TC-46 | Apply mobile filters, navigate away and back, then reopen Filters; repeat with unapplied selections | The sheet opens with default values and no old ingredient chips or pending selections; background scrolling works |
+| TC-42 | Note Tonight's Pick, then change category, diet, cooking time, difficulty, ingredient exclusions, and search | Featured recipe remains unchanged; only the feed is filtered |
+| TC-43 | Enter a search or combine filters with no matches | Feed shows its empty state; Tonight's Pick still displays a recipe and Surprise me stays enabled |
+| TC-44 | Click Surprise me while the feed has no matches | Opens a reviewed recipe from the full collection |
+| TC-45 | Repeat Surprise me after returning home | Can reach recipes outside the feed filters and avoids the previous selection when alternatives exist |
+| TC-46 | Repeat with desktop and mobile viewports | Both layouts preserve the independent discovery behavior |
+| TC-47 | Return an empty collection or simulate an API error | No invalid featured recipe is shown; Surprise me is disabled until recipes are available |
+
+#### Favorite Micro Animation (#62)
+
+| Test ID | Description | Expected Result |
+| ------- | ----------- | --------------- |
+| TC-62-01 | Save a recipe from a card or Tonight's Pick | Heart springs into a list icon; both controls show the saved state and expose the updated label and pressed state |
+| TC-62-02 | Remove a saved recipe on the home page | List springs back into a heart; the recipe is removed from Favorites |
+| TC-62-03 | Toggle repeatedly before the spring finishes | Animation reverses smoothly and ends in the latest selected state |
+| TC-62-04 | Enable reduced motion, then save and remove | Icons crossfade without rotation or scaling; saving and removing still work |
+| TC-62-05 | Use keyboard on desktop and tap on mobile | Enter/Space and touch toggle favorites; keyboard focus remains visible and touch targets stay at least 44px |
+| TC-62-06 | Reload after saving, then open Favorites | Saved recipes retain their list icon without replaying the animation on mount; removing a favorite updates the list immediately |
+
+#### Search and Filter Navigation Reset (#101)
+
+| Test ID | Description | Expected Result |
+| ------- | ----------- | --------------- |
+| TC-101-01 | Search and apply category, diet, time, difficulty, and ingredient exclusions; visit Favorites, then return using Home or browser Back | Search is empty, every filter is at its default, and the full default feed is displayed; saved favorites remain |
+| TC-101-02 | Search and apply filters, open a featured recipe or recipe card, then return | Search and filters reset; a new search and filter selection still work |
+| TC-101-03 | Search and apply filters, then click the logo or Home while already on the homepage | Search and all filters reset even though the pathname stays the same |
+| TC-101-04 | Type a search, then navigate away and back before the 350 ms debounce finishes | The old query never reappears in the input or recipe results |
+| TC-101-05 | Apply mobile filters, navigate away and back, then reopen Filters; repeat with unapplied selections | The sheet opens with default values and no old ingredient chips or pending selections; background scrolling works |
 
 ## 6. Team Contribution
 

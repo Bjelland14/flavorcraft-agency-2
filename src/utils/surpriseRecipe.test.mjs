@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { pickSurpriseRecipe } from './surpriseRecipe.js';
+import { filterRecipes } from './filterRecipes.js';
 
 const dinner = {
   id: 'bfeeef7c-b89a-4e9e-871c-928912a09d61', title: 'Tomato pasta', description: 'A quick tomato pasta for dinner.',
@@ -15,27 +16,24 @@ const slowDinner = { ...dinner, id: 'd91c9778-765f-4a74-820c-8b58990ba592', cook
 
 test('random selection can reach every eligible recipe without filters', () => {
   const recipes = [dinner, breakfast, slowDinner];
-  assert.equal(pickSurpriseRecipe(recipes, {}, null, () => 0), dinner);
-  assert.equal(pickSurpriseRecipe(recipes, {}, null, () => 0.5), breakfast);
-  assert.equal(pickSurpriseRecipe(recipes, {}, null, () => 0.999), slowDinner);
+  assert.equal(pickSurpriseRecipe(recipes, null, () => 0), dinner);
+  assert.equal(pickSurpriseRecipe(recipes, null, () => 0.5), breakfast);
+  assert.equal(pickSurpriseRecipe(recipes, null, () => 0.999), slowDinner);
 });
 
-test('random selection applies search, category, diet, and time together', () => {
-  const filters = { search: 'tomato', category: 'Dinner', diet: ['lactoseFree', 'vegetarian'], time: '30' };
-  for (const random of [0, 0.5, 0.999]) {
-    assert.equal(pickSurpriseRecipe([breakfast, slowDinner, dinner], filters, null, () => random), dinner);
+test('discovery can reach every available recipe even when the feed has no search or filter matches', () => {
+  const recipes = [dinner, breakfast, slowDinner];
+  for (const filters of [
+    { search: 'unmatched' }, { category: ['Dessert'] }, { diet: ['vegan'] }, { time: '1' },
+    { difficulty: ['Hard'] }, { excludedIngredients: ['tomatoes'] },
+    { search: 'unmatched', category: ['Dessert'], diet: ['vegan'], time: '1',
+      difficulty: ['Hard'], excludedIngredients: ['tomatoes'] },
+  ]) {
+    assert.deepEqual(filterRecipes(recipes, filters), []);
+    assert.equal(pickSurpriseRecipe(recipes, null, () => 0), dinner);
+    assert.equal(pickSurpriseRecipe(recipes, null, () => 0.5), breakfast);
+    assert.equal(pickSurpriseRecipe(recipes, null, () => 0.999), slowDinner);
   }
-});
-
-test('Surprise me respects difficulty and ingredient exclusions', () => {
-  const easyDinner = { ...dinner, difficulty: 'Easy' };
-  const mediumDinner = { ...slowDinner, difficulty: 'Medium' };
-  assert.equal(pickSurpriseRecipe([easyDinner, mediumDinner], {
-    category: ['Dinner'], difficulty: ['Easy'], excludedIngredients: ['beans'],
-  }), easyDinner);
-  assert.equal(pickSurpriseRecipe([easyDinner, mediumDinner], {
-    difficulty: ['Easy'], excludedIngredients: ['tomatoes'],
-  }), null);
 });
 
 test('test recipes and unfinished content are never selected', () => {
@@ -46,28 +44,25 @@ test('test recipes and unfinished content are never selected', () => {
     { ...dinner, image: null },
   ];
   for (const random of [0, 0.5, 0.999]) {
-    assert.equal(pickSurpriseRecipe([...excluded, dinner], {}, null, () => random), dinner);
+    assert.equal(pickSurpriseRecipe([...excluded, dinner], null, () => random), dinner);
   }
   assert.equal(pickSurpriseRecipe(excluded), null);
 });
 
-test('avoids the previous recipe whenever another matching recipe exists', () => {
+test('avoids the previous recipe whenever another available recipe exists', () => {
   const recipes = [dinner, breakfast, slowDinner];
   for (const previous of recipes) {
     for (const random of [0, 0.5, 0.999]) {
-      assert.notEqual(pickSurpriseRecipe(recipes, {}, previous.id, () => random).id, previous.id);
+      assert.notEqual(pickSurpriseRecipe(recipes, previous.id, () => random).id, previous.id);
     }
   }
-  assert.equal(pickSurpriseRecipe(recipes, { category: 'Dinner' }, dinner.id, () => 0), slowDinner);
+  assert.equal(pickSurpriseRecipe(recipes, dinner.id, () => 0), breakfast);
 });
 
-test('allows the sole matching recipe again and never relaxes filters', () => {
-  assert.equal(pickSurpriseRecipe([dinner, breakfast], { category: 'Dinner' }, dinner.id), dinner);
-  assert.equal(pickSurpriseRecipe([dinner], { diet: ['glutenFree'] }, dinner.id), null);
+test('allows the sole available recipe to be selected again', () => {
+  assert.equal(pickSurpriseRecipe([dinner], dinner.id), dinner);
 });
 
-test('empty collections and no matching filters return no recipe', () => {
+test('empty collections return no recipe', () => {
   assert.equal(pickSurpriseRecipe([]), null);
-  assert.equal(pickSurpriseRecipe([dinner], { diet: ['glutenFree'] }), null);
-  assert.equal(pickSurpriseRecipe([dinner], { search: 'unmatched' }), null);
 });

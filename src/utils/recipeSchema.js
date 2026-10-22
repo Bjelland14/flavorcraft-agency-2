@@ -3,7 +3,7 @@
 // No aggregateRating: the API has no rating data (agreed with the PO).
 // Never includes owner.email, for privacy.
 
-const SITE_URL = 'https://flavorcraft-team-beta.netlify.app';
+const SITE_URL = 'https://flavorcraft-team-beta.vercel.app';
 
 function toIsoDuration(minutes) {
   const total = Number(minutes);

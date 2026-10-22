@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { ArrowRight02Icon, DiceFaces05Icon, FavouriteIcon, StarIcon } from '@hugeicons/core-free-icons';
+import { ArrowRight02Icon, DiceFaces05Icon, StarIcon } from '@hugeicons/core-free-icons';
+import FavoriteButton from './FavoriteButton';
 import '../../styles/featured-recipe.css';
 
 function FeaturedPhoto({ recipe }) {
@@ -18,9 +19,6 @@ function FeaturedPhoto({ recipe }) {
 }
 
 function FeaturedRecipe({ recipe, status, isFavorite, onToggleFavorite, onSurprise }) {
-  const favoriteLabel = recipe
-    ? `${isFavorite ? 'Remove' : 'Save'} ${recipe.title} ${isFavorite ? 'from' : 'to'} favorites`
-    : '';
   return (
     <section className={`featured-recipe${recipe ? '' : ' featured-recipe--empty'}`}
       aria-labelledby="featured-title" aria-busy={status === 'loading'}>
@@ -30,11 +28,8 @@ function FeaturedRecipe({ recipe, status, isFavorite, onToggleFavorite, onSurpri
       </span>
       {recipe && <FeaturedPhoto key={recipe.image?.url || 'no-photo'} recipe={recipe} />}
       {recipe && (
-        <button type="button" className="featured-favorite" aria-label={favoriteLabel}
-          title={favoriteLabel} aria-pressed={isFavorite} onClick={() => onToggleFavorite(recipe)}>
-          <HugeiconsIcon icon={FavouriteIcon} size={22} aria-hidden="true"
-            fill={isFavorite ? 'currentColor' : 'none'} />
-        </button>
+        <FavoriteButton className="featured-favorite" recipe={recipe}
+          isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />
       )}
       <div className="featured-content">
         {recipe?.category && <p className="featured-category">{recipe.category}</p>}
@@ -49,7 +44,7 @@ function FeaturedRecipe({ recipe, status, isFavorite, onToggleFavorite, onSurpri
           <p className="featured-message">
             {status === 'loading' ? 'Finding recipes for you…' : status === 'error'
               ? 'Load the recipes below to find your next meal.'
-              : 'No matching recipes. Try changing your search or filters.'}
+              : 'No recipes available yet.'}
           </p>
         )}
         {recipe && Array.isArray(recipe.ingredients) && <p className="featured-ingredients">
