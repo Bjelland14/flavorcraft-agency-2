@@ -348,7 +348,7 @@ function RecipeDetail({ favorites = [], onToggleFavorite }) {
           setResult({
             id,
             attempt,
-            status: error.status === 404 ? 'not-found' : 'error',
+            status: [400, 404].includes(error.status) ? 'not-found' : 'error',
             recipe: null,
           });
         }
@@ -398,7 +398,7 @@ function RecipeDetail({ favorites = [], onToggleFavorite }) {
       image: loadedRecipe.image?.url,
       imageAlt: loadedRecipe.image?.alt || loadedRecipe.title,
     }
-    : { title: status === 'not-found' ? 'Recipe not found' : undefined });
+    : { fullTitle: status === 'not-found' ? 'Recipe Not Found - FlavorCraft' : undefined });
   
   if (status === 'loading') {
     return (
@@ -411,9 +411,9 @@ function RecipeDetail({ favorites = [], onToggleFavorite }) {
   if (status === 'not-found') {
     return (
       <main className="content recipe-detail recipe-detail-message">
-        <h1>Recipe not found</h1>
+        <h1>Recipe Not Found</h1>
         <p>This recipe may have been removed or the link is incorrect.</p>
-        <Link className="button detail-return" to="/">Browse recipes</Link>
+        <Link className="button detail-return" to="/">Browse Recipes</Link>
       </main>
     );
   }
