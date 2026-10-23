@@ -34,6 +34,6 @@ Each entry includes the date, role, task, what AI was used for, and what was don
 
 **Task:** Static recipe list (#63)
 
-**What I used Ai to generate the static recipe list in JSON format, as suggested by the PO.
+**What I used AI for: Generating the static recipe list in JSON format, as suggested by the PO.
 
 **What I did myself / how I checked it:**  chose the 23 Norwegian dinners, checked the recipes and diet info.
