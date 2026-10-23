@@ -196,6 +196,15 @@ Testing will verify that the application maintains a responsive and accessible l
 | TC-46 | Repeat with desktop and mobile viewports | Both layouts preserve the independent discovery behavior |
 | TC-47 | Return an empty collection or simulate an API error | No invalid featured recipe is shown; Surprise me is disabled until recipes are available |
 
+#### Sticky Ingredients Card (#85)
+
+| Test ID | Description | Expected Result |
+| ------- | ----------- | --------------- |
+| TC-85-01 | On desktop (1024px and wider), scroll a recipe with many steps | Ingredients sticks 96px below the viewport top, matching the Home Filters card, while steps scroll alongside it |
+| TC-85-02 | Scroll to the end of the steps and the footer | Ingredients stays within the recipe workspace and does not overlap the steps or footer |
+| TC-85-03 | Open a long ingredient list on a short desktop viewport | The card fits below the header; its contents scroll so every ingredient and checkbox remains reachable |
+| TC-85-04 | View and scroll the recipe on mobile or below the desktop breakpoint | Ingredients remains in normal document flow without an internal height limit or scrollbar |
+
 #### Favorite Micro Animation (#62)
 
 | Test ID | Description | Expected Result |

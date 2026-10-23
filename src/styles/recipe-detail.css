@@ -914,6 +914,17 @@
   }
 }
 
+@media (min-width: 1024px) {
+  .ingredients-panel {
+    /* Match the Home filters, with room below the card on short screens. */
+    position: sticky;
+    align-self: start;
+    top: 96px;
+    max-height: calc(100dvh - 120px);
+    overflow-y: auto;
+  }
+}
+
 @media (min-width: 900px) and (max-width: 1199px) {
   .recipe-hero {
     grid-template-columns: minmax(360px, .93fr) minmax(0, 1fr);
