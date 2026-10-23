@@ -207,6 +207,16 @@ Testing will verify that the application maintains a responsive and accessible l
 | TC-62-05 | Use keyboard on desktop and tap on mobile | Enter/Space and touch toggle favorites; keyboard focus remains visible and touch targets stay at least 44px |
 | TC-62-06 | Reload after saving, then open Favorites | Saved recipes retain their list icon without replaying the animation on mount; removing a favorite updates the list immediately |
 
+#### Search and Filter Navigation Reset (#101)
+
+| Test ID | Description | Expected Result |
+| ------- | ----------- | --------------- |
+| TC-101-01 | Search and apply category, diet, time, difficulty, and ingredient exclusions; visit Favorites, then return using Home or browser Back | Search is empty, every filter is at its default, and the full default feed is displayed; saved favorites remain |
+| TC-101-02 | Search and apply filters, open a featured recipe or recipe card, then return | Search and filters reset; a new search and filter selection still work |
+| TC-101-03 | Search and apply filters, then click the logo or Home while already on the homepage | Search and all filters reset even though the pathname stays the same |
+| TC-101-04 | Type a search, then navigate away and back before the 350 ms debounce finishes | The old query never reappears in the input or recipe results |
+| TC-101-05 | Apply mobile filters, navigate away and back, then reopen Filters; repeat with unapplied selections | The sheet opens with default values and no old ingredient chips or pending selections; background scrolling works |
+
 ## 6. Team Contribution
 
 | Role | Responsibility |

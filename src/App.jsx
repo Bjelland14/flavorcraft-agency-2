@@ -1,13 +1,9 @@
-import { useEffect, useState } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
-import Header from './assets/components/Header';
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import RecipeBrowser from './assets/components/RecipeBrowser';
 import Footer from './assets/components/Footer';
 import CookieBanner from './assets/components/CookieBanner'; 
-import Home from './pages/Home';
-import Favorites from './pages/Favorites';
-import RecipeDetail from './pages/RecipeDetail';
 import { readFavorites, toggleFavorite, writeFavorites } from './utils/favorites';
-import { EMPTY_FILTERS } from './utils/recipeFilters';
 
 function App() {
   const [favorites, setFavorites] = useState(() => {
@@ -18,13 +14,8 @@ function App() {
     }
   });
   const [favoritesError, setFavoritesError] = useState('');
-  const [search, setSearch] = useState('');
-  const [debouncedSearch, setDebouncedSearch] = useState('');
-  const [filters, setFilters] = useState(EMPTY_FILTERS);
-  const [categories, setCategories] = useState([]);
   const [lastSurpriseRecipeId, setLastSurpriseRecipeId] = useState(null);
-  const { pathname } = useLocation();
-  const isRecipeDetail = pathname.startsWith('/recipe');
+  const location = useLocation();
 
   function handleToggleFavorite(recipe) {
     const next = toggleFavorite(favorites, recipe);
@@ -37,44 +28,18 @@ function App() {
     }
   }
 
-  useEffect(() => {
-    const timer = setTimeout(() => setDebouncedSearch(search), 350);
-    return () => clearTimeout(timer);
-  }, [search]);
-
   return (
     <div className="app-shell">
-      <Header
-        showSearch={pathname === '/' || isRecipeDetail} search={search} onSearchChange={setSearch} isRecipeDetail={isRecipeDetail}
+      <RecipeBrowser
+        key={location.key}
+        isHome={location.pathname === '/'}
+        isRecipeDetail={location.pathname.startsWith('/recipe')}
+        favorites={favorites}
+        favoritesError={favoritesError}
+        onToggleFavorite={handleToggleFavorite}
+        lastSurpriseRecipeId={lastSurpriseRecipeId}
+        onSurpriseRecipeSelected={setLastSurpriseRecipeId}
       />
-      {favoritesError && <p className="favorites-error" role="alert">{favoritesError}</p>}
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              search={debouncedSearch}
-              filters={filters}
-              onFiltersChange={setFilters}
-              onCategoriesLoad={setCategories}
-              categories={categories}
-              favorites={favorites}
-              onToggleFavorite={handleToggleFavorite}
-              lastSurpriseRecipeId={lastSurpriseRecipeId}
-              onSurpriseRecipeSelected={setLastSurpriseRecipeId}
-            />
-          }
-        />
-        <Route path="/favorites" element={<Favorites favorites={favorites} onToggleFavorite={handleToggleFavorite} />} />
-        <Route
-          path="/recipe/:id"
-          element={<RecipeDetail favorites={favorites} onToggleFavorite={handleToggleFavorite} />}
-        />
-        <Route
-          path="/recipe"
-          element={<RecipeDetail favorites={favorites} onToggleFavorite={handleToggleFavorite} />}
-        />
-      </Routes>
       <Footer />
       <CookieBanner />
     </div>
