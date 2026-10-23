@@ -178,14 +178,14 @@ function Home({
         />
         <section className="recipe-area" aria-labelledby="view-heading">
           <div className="recipe-toolbar">
-            <h2 id="view-heading">
+        <h2 id="view-heading">
               {search.trim()
                 ? 'Search results'
                 : activeCount > 0
-                  ? `${recipes.length} ${recipes.length === 1 ? 'recipe' : 'recipes'}`
+                  ? 'Filtered recipes'
                   : 'All recipes'}
               {result.status === 'success' && (
-                <span className="recipe-total">{feedRecipes.length}</span>
+                <span className="recipe-total">{recipes.length}</span>
               )}
             </h2>
             <button
