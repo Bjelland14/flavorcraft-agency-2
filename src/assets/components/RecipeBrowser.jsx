@@ -9,6 +9,7 @@ import { EMPTY_FILTERS } from '../../utils/recipeFilters';
 // App keys this component by navigation entry, resetting transient discovery state.
 function RecipeBrowser({
   isHome,
+  isRecipeDetail,
   favorites,
   favoritesError,
   onToggleFavorite,
@@ -28,7 +29,10 @@ function RecipeBrowser({
   return (
     <>
       <Header
-        showSearch={isHome} search={search} onSearchChange={setSearch}
+        showSearch={isHome || isRecipeDetail}
+        search={search}
+        onSearchChange={setSearch}
+        isRecipeDetail={isRecipeDetail}
       />
       {favoritesError && <p className="favorites-error" role="alert">{favoritesError}</p>}
       <Routes>
@@ -49,8 +53,14 @@ function RecipeBrowser({
           }
         />
         <Route path="/favorites" element={<Favorites favorites={favorites} onToggleFavorite={onToggleFavorite} />} />
-        <Route path="/recipe/:id" element={<RecipeDetail />} />
-        <Route path="/recipe" element={<RecipeDetail />} />
+        <Route
+          path="/recipe/:id"
+          element={<RecipeDetail favorites={favorites} onToggleFavorite={onToggleFavorite} />}
+        />
+        <Route
+          path="/recipe"
+          element={<RecipeDetail favorites={favorites} onToggleFavorite={onToggleFavorite} />}
+        />
       </Routes>
     </>
   );

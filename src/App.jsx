@@ -33,6 +33,7 @@ function App() {
       <RecipeBrowser
         key={location.key}
         isHome={location.pathname === '/'}
+        isRecipeDetail={location.pathname.startsWith('/recipe')}
         favorites={favorites}
         favoritesError={favoritesError}
         onToggleFavorite={handleToggleFavorite}

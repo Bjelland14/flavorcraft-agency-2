@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { HugeiconsIcon } from '@hugeicons/react';
-import { Home01Icon, FavouriteIcon } from '@hugeicons/core-free-icons';
+import { Home01Icon, FavouriteIcon, UserIcon } from '@hugeicons/core-free-icons';
 import '../../styles/footer.css';
 
 function Footer() {
@@ -14,6 +14,10 @@ function Footer() {
         <HugeiconsIcon icon={FavouriteIcon} size={24} aria-hidden="true" />
         <span>Favorites</span>
       </NavLink>
+      <button className="nav-button" type="button" aria-label="Log in">
+        <HugeiconsIcon icon={UserIcon} size={24} aria-hidden="true" />
+        <span>Log in</span>
+      </button>
     </nav>
   );
 }
