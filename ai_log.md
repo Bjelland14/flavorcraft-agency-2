@@ -75,7 +75,9 @@ Each entry includes the date, role, task, what AI was used for, and what was don
 **What I did myself / how I checked it:**  I designed the final screens in Figma and chose or rejected each AI suggestion. For example, I kept my own toast and progress bar styles and rejected the photo ideas that did not match the rest of the app. I compared every new page with the existing ones for consistency.
 
 **Task:** Working in Figma
+
 **What I used AI for:** Explanations of auto layout, component variants, hover interactions and Smart animate
+
 **What I did myself / how I checked it:** I built and fixed the components, variants and prototype interactions myself and tested them in Figma’s prototype mode. 
 
 
